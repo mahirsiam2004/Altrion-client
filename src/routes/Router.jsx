@@ -6,9 +6,14 @@ import { Signup } from "../pages/Signup";
 import { Dashboard } from "../pages/Dashboard";
 import { MyProfile } from "../pages/MyProfile";
 import { PrivateRoute } from "./PrivateRoute";
-import MainLayout from "../layourts/MainLayout";
 import AllCourses from "../pages/AllCourses";
-
+import CourseDetails from "../pages/CourseDetails";
+import AddCourse from "../pages/AddCourse";
+import MyCourses from "../pages/MyCourses";
+import MyEnrolledCourses from "../pages/MyEnrolledCourses";
+import UpdateCourse from "../pages/UpdateCourse";
+import NotFound from "../pages/NotFound";
+import MainLayout from "../layourts/MainLayout";
 
 export const Router = createBrowserRouter([
   {
@@ -28,9 +33,53 @@ export const Router = createBrowserRouter([
         element: <Signup />,
       },
       {
-        path:"/courses",
-        Component:AllCourses,
-        loader:()=>fetch("http://localhost:3000/courses")
+        path: "/courses",
+        element: <AllCourses />,
+        loader: () => fetch("http://localhost:3000/courses"),
+      },
+      {
+        path: "/course/:id",
+        element: (
+          <PrivateRoute>
+            <CourseDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/courses/${params.id}`),
+      },
+      {
+        path: "/add-course",
+        element: (
+          <PrivateRoute>
+            <AddCourse />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-courses",
+        element: (
+          <PrivateRoute>
+            <MyCourses />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-enrolled-courses",
+        element: (
+          <PrivateRoute>
+            <MyEnrolledCourses />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-course/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateCourse />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/courses/${params.id}`),
       },
       {
         path: "/dashboard",
@@ -49,5 +98,9 @@ export const Router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
