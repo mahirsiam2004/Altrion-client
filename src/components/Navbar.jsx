@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Menu, X, BookOpen, LogOut, User } from "lucide-react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
+import ThemeToggle from "./ThemeToggle";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,6 +66,10 @@ export const Navbar = () => {
                 {link.label}
               </NavLink>
             ))}
+            <div className="hidden md:flex items-center space-x-4">
+  <ThemeToggle />  {/* Add this */}
+  {/* ... rest of your auth buttons */}
+</div>
           </div>
 
           {/* Desktop Auth Section */}
@@ -117,17 +122,24 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
+          
           <button
             onClick={toggleMenu}
             className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100"
+            
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
+          
+          
         </div>
+        
       </div>
 
       {/* Mobile Menu */}
+      
       {isOpen && (
+        
         <div className="md:hidden bg-white border-t border-gray-200">
           <div className="px-4 pt-2 pb-4 space-y-2">
             {/* Navigation Links */}
@@ -146,6 +158,7 @@ export const Navbar = () => {
               >
                 {link.label}
               </NavLink>
+              
             ))}
 
             {/* Mobile Auth Section */}
@@ -197,6 +210,7 @@ export const Navbar = () => {
                 >
                   Sign Up
                 </Link>
+                
               </div>
             )}
           </div>

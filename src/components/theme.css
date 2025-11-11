@@ -1,0 +1,130 @@
+/* Add this to your index.css or create a new theme.css file */
+
+/* Root variables for light mode (default) */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-tertiary: #6b7280;
+  
+  --border-color: #e5e7eb;
+  --border-hover: #d1d5db;
+  
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  
+  --accent-primary: #4f46e5;
+  --accent-hover: #4338ca;
+}
+
+/* Dark mode variables */
+.dark {
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  
+  --text-primary: #f9fafb;
+  --text-secondary: #e5e7eb;
+  --text-tertiary: #d1d5db;
+  
+  --border-color: #374151;
+  --border-hover: #4b5563;
+  
+  --card-bg: #1f2937;
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  
+  --input-bg: #374151;
+  --input-border: #4b5563;
+  
+  --accent-primary: #6366f1;
+  --accent-hover: #818cf8;
+}
+
+/* Apply theme automatically to common elements */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Automatically style all common elements */
+.theme-bg {
+  background-color: var(--bg-primary);
+}
+
+.theme-bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.theme-card {
+  background-color: var(--card-bg);
+  box-shadow: 0 1px 3px var(--card-shadow);
+}
+
+.theme-text {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+.theme-border {
+  border-color: var(--border-color);
+}
+
+.theme-input {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+/* Auto-apply to all common HTML elements */
+input, textarea, select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Cards and containers */
+[class*="bg-white"] {
+  background-color: var(--card-bg) !important;
+}
+
+[class*="bg-gray-50"] {
+  background-color: var(--bg-secondary) !important;
+}
+
+/* Text colors */
+[class*="text-gray-900"] {
+  color: var(--text-primary) !important;
+}
+
+[class*="text-gray-700"] {
+  color: var(--text-secondary) !important;
+}
+
+[class*="text-gray-600"] {
+  color: var(--text-tertiary) !important;
+}
+
+/* Borders */
+[class*="border-gray-200"],
+[class*="border-gray-300"] {
+  border-color: var(--border-color) !important;
+}
+
+/* Smooth transitions for all theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
