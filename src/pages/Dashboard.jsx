@@ -203,7 +203,7 @@ export const Dashboard = () => {
               >
                 <Link
                   to={link.link}
-                  className={`block ${link.bgColor} dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all group`}
+                  className={`block ${link.bgColor} dark:bg-gray-500 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all group`}
                 >
                   <div
                     className={`w-16 h-16 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center text-white mb-4 shadow-lg group-hover:scale-110 transition-transform`}

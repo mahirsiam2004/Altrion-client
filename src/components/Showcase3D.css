@@ -1,0 +1,256 @@
+/* -------------------------------------------------
+   Showcase 3D – Altrion Hero (Light + Dark)
+   ------------------------------------------------- */
+.showcase-section {
+  position: relative;
+  /* Light mode → use page background */
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 9rem 0 6rem;
+  overflow: hidden;
+}
+
+/* Dark-mode only – override with the deep gradient */
+.dark .showcase-section {
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+}
+
+/* -------------------------------------------------
+   Layout
+   ------------------------------------------------- */
+.showcase-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .showcase-container { grid-template-columns: 1fr 1fr; }
+}
+
+/* -------------------------------------------------
+   Text side
+   ------------------------------------------------- */
+.showcase-text { text-align: center; }
+@media (min-width: 768px) { .showcase-text { text-align: left; } }
+
+.showcase-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+@media (min-width: 1024px) { .showcase-title { font-size: 4rem; } }
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--accent-primary), #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.showcase-desc {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 38ch;
+}
+
+/* CTA button – uses accent variables */
+.showcase-cta {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  background: var(--accent-primary);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+  transition: background 0.3s, transform 0.2s;
+}
+.showcase-cta:hover { background: var(--accent-hover); }
+
+/* -------------------------------------------------
+   3-D CUBE
+   ------------------------------------------------- */
+.cube-scene {
+  perspective: 1200px;
+  width: 260px;
+  height: 260px;
+  margin: 0 auto;
+}
+@media (min-width: 640px) { .cube-scene { width: 320px; height: 320px; } }
+@media (min-width: 1024px) { .cube-scene { width: 380px; height: 380px; } }
+
+.cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: rotateCube 20s infinite linear;
+}
+.cube:hover { animation-play-state: paused; }
+
+.cube__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: .75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,.3);
+}
+
+/* Light-mode face tweaks */
+.showcase-section .cube__face {
+  background: rgba(0,0,0,.04);
+  border-color: rgba(0,0,0,.12);
+}
+
+/* Dark-mode face tweaks */
+.dark .showcase-section .cube__face {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.15);
+}
+
+/* Position each face (size = half of cube side) */
+.cube__face--front  { transform: translateZ(160px); }
+.cube__face--back   { transform: rotateY(180deg) translateZ(160px); }
+.cube__face--right  { transform: rotateY(90deg) translateZ(160px); }
+.cube__face--left   { transform: rotateY(-90deg) translateZ(160px); }
+.cube__face--top    { transform: rotateX(90deg) translateZ(160px); }
+.cube__face--bottom { transform: rotateX(-90deg) translateZ(160px); }
+
+/* Face content */
+.cube-logo { width: 70%; object-fit: contain; }
+.cube-img { width: 100%; height: 100%; object-fit: cover; }
+
+.cube-caption {
+  position: absolute;
+  bottom: .75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.5);
+  color: #fff;
+  padding: .25rem .75rem;
+  border-radius: .35rem;
+  font-size: .85rem;
+  font-weight: 500;
+}
+.dark .cube-caption { background: rgba(0,0,0,.6); }
+
+/* Stats face */
+.cube-stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: .5rem;
+  text-align: center;
+  font-size: .9rem;
+}
+.stat { 
+  font-size: 1.35rem; 
+  font-weight: 700; 
+  color: var(--accent-primary); 
+}
+.label { 
+  color: var(--text-secondary); 
+  font-size: .75rem; 
+}
+
+/* Animation */
+@keyframes rotateCube {
+  0%   { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* Bottom glow – only in dark mode */
+.showcase-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8rem;
+  background: linear-gradient(to top, rgba(0,0,0,.6), transparent);
+  opacity: 0;
+}
+.dark .showcase-glow { opacity: 1; }
+/* -------------------------------------------------
+   IMAGE STYLING – NOT FULL COVER
+   ------------------------------------------------- */
+.cube-img-wrapper {
+  width: 70%;
+  height: 70%;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+.cube-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Logo face – slightly larger */
+.cube__face--front .cube-img-wrapper,
+.cube-logo {
+  width: 65%;
+  height: 65%;
+  margin: 0 auto;
+}
+
+/* Caption stays below image */
+.cube-caption {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.35rem;
+}
+.dark .cube-caption {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+/* -------------------------------------------------
+   CUBE FACE BACKGROUND (no image bleed)
+   ------------------------------------------------- */
+.cube__face {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Light mode face */
+.showcase-section .cube__face {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+/* Dark mode face */
+.dark .showcase-section .cube__face {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+

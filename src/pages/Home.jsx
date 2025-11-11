@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Banner from "../components/Banner";
 import CourseCard from "../components/CourseCard";
 import { Users, Award, BookOpen, TrendingUp } from "lucide-react";
+import Showcase3D from "../components/Showcase3D";
 
 export const Home = () => {
   const [popularCourses, setPopularCourses] = useState([]);
@@ -148,7 +149,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
-
+   <Showcase3D></Showcase3D>
       {/* Top Instructors Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -234,6 +235,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
+   
     </div>
   );
 };
