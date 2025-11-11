@@ -220,6 +220,18 @@ export const Dashboard = () => {
               </motion.div>
             ))}
           </div>
+          
+          {/* Note about Update Course */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg"
+          >
+            <p className="text-sm text-blue-800 dark:text-blue-500">
+              💡 <strong>Tip:</strong> To update a course, go to "My Courses" and click the "Update" button on any course card.
+            </p>
+          </motion.div>
         </div>
 
         {/* Recent Activity */}

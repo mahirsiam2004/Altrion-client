@@ -31,9 +31,6 @@ export const Navbar = () => {
   const authLinks = user
     ? [
         { path: '/dashboard', label: 'Dashboard' },
-        { path: '/my-courses', label: 'My Courses' },
-        { path: '/my-enrolled-courses', label: 'Enrolled' },
-        { path: '/add-course', label: 'Add Course' },
       ]
     : [];
 
@@ -77,7 +74,11 @@ export const Navbar = () => {
             
             {user ? (
               <>
-                <div className="flex items-center space-x-3">
+                {/* User Profile Dropdown */}
+                <Link
+                  to="/profile"
+                  className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                >
                   {user.photoURL ? (
                     <img
                       src={user.photoURL}
@@ -95,7 +96,7 @@ export const Navbar = () => {
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     {user.displayName || 'User'}
                   </span>
-                </div>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="flex items-center space-x-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
@@ -165,7 +166,12 @@ export const Navbar = () => {
             {/* Mobile Auth Section */}
             {user ? (
               <div className="pt-4 border-t border-gray-200 dark:border-gray-800 space-y-3">
-                <div className="flex items-center space-x-3 px-4">
+                {/* Profile Link */}
+                <Link
+                  to="/profile"
+                  onClick={closeMenu}
+                  className="flex items-center space-x-3 px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                >
                   {user.photoURL ? (
                     <img
                       src={user.photoURL}
@@ -186,7 +192,7 @@ export const Navbar = () => {
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
                   </div>
-                </div>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
