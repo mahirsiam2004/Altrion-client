@@ -29,7 +29,7 @@ const Review = () => {
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
-              className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-full text-sm font-semibold mb-4"
+              className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm  rounded-full text-sm font-semibold mb-4"
             >
               💬 What Our Students Say
             </motion.span>
