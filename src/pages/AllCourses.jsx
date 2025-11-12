@@ -24,10 +24,17 @@ const AllCourses = () => {
       } catch (err) {
         console.error("Error fetching categories:", err);
         // Fallback categories if server fails
-        setCategories(["All", "Web Development", "Data Science", "Mobile Development", "UI/UX Design", "Digital Marketing"]);
+        setCategories([
+          "All",
+          "Web Development",
+          "Data Science",
+          "Mobile Development",
+          "UI/UX Design",
+          "Digital Marketing",
+        ]);
       }
     };
-    
+
     fetchCategories();
   }, []);
 
@@ -53,40 +60,42 @@ const AllCourses = () => {
   useEffect(() => {
     const filterCourses = async () => {
       setLoading(true);
-      
+
       try {
         // Build query parameters
         const params = new URLSearchParams();
-        
+
         if (selectedCategory !== "All") {
           params.append("category", selectedCategory);
         }
-        
+
         if (searchTerm.trim()) {
           params.append("search", searchTerm);
         }
-        
+
         // Fetch filtered data from server
-        const response = await fetch(`http://localhost:3000/courses?${params.toString()}`);
+        const response = await fetch(
+          `http://localhost:3000/courses?${params.toString()}`
+        );
         const data = await response.json();
         setFilteredCourses(data);
       } catch (error) {
         console.error("Error filtering courses:", error);
         // Fallback to client-side filtering if server fails
         let filtered = initialData;
-        
+
         if (selectedCategory !== "All") {
           filtered = filtered.filter(
             (course) => course.category === selectedCategory
           );
         }
-        
+
         if (searchTerm.trim()) {
           filtered = filtered.filter((course) =>
             course.title.toLowerCase().includes(searchTerm.toLowerCase())
           );
         }
-        
+
         setFilteredCourses(filtered);
       } finally {
         setLoading(false);
