@@ -19,7 +19,7 @@ const MyCourses = () => {
   const fetchMyCourses = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/courses/instructor/${user.email}`
+        `https://altrion-server.vercel.app/courses/instructor/${user.email}`
       );
       const data = await response.json();
       setCourses(data);
@@ -39,7 +39,7 @@ const MyCourses = () => {
     if (!confirm) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/courses/${id}`, {
+      const response = await fetch(`https://altrion-server.vercel.app/courses/${id}`, {
         method: "DELETE",
       });
 

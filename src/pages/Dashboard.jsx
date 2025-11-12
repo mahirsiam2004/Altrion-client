@@ -31,15 +31,11 @@ export const Dashboard = () => {
   const fetchDashboardStats = async () => {
     try {
       // Fetch instructor's courses
-      const coursesRes = await fetch(
-        `http://localhost:3000/courses/instructor/${user.email}`
-      );
+      const coursesRes = await fetch(`https://altrion-server.vercel.app/courses/instructor/${user.email}`);
       const coursesData = await coursesRes.json();
 
       // Fetch enrolled courses
-      const enrolledRes = await fetch(
-        `http://localhost:3000/enrollments/${user.email}`
-      );
+      const enrolledRes = await fetch(`https://altrion-server.vercel.app/enrollments/${user.email}`);
       const enrolledData = await enrolledRes.json();
 
       // Calculate total students

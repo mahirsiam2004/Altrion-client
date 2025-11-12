@@ -1,14 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { 
-  User, 
-  Mail, 
-  Calendar, 
-  Award, 
-  BookOpen, 
+import {
+  User,
+  Mail,
+  Calendar,
+  Award,
+  BookOpen,
   GraduationCap,
   Edit,
-  Camera
+  Camera,
 } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
@@ -37,15 +37,11 @@ export const MyProfile = () => {
   const fetchUserStats = async () => {
     try {
       // Fetch created courses
-      const createdRes = await fetch(
-        `http://localhost:3000/courses/instructor/${user.email}`
-      );
+      const createdRes = await fetch(`https://altrion-server.vercel.app/courses/instructor/${user.email}`);
       const createdData = await createdRes.json();
 
       // Fetch enrolled courses
-      const enrolledRes = await fetch(
-        `http://localhost:3000/enrollments/${user.email}`
-      );
+      const enrolledRes = await fetch(`https://altrion-server.vercel.app/enrollments/${user.email}`);
       const enrolledData = await enrolledRes.json();
 
       // Calculate total students
@@ -125,7 +121,7 @@ export const MyProfile = () => {
                     <User className="w-16 h-16 text-indigo-600 dark:text-indigo-400" />
                   </div>
                 )}
-                
+
                 {isEditing && (
                   <button className="absolute bottom-2 right-2 w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white hover:bg-indigo-700 shadow-lg">
                     <Camera className="w-5 h-5" />

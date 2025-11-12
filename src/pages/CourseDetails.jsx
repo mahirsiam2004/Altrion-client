@@ -25,7 +25,7 @@ const CourseDetails = () => {
         courseTitle: course.title,
       };
 
-      const response = await fetch("http://localhost:3000/enrollments", {
+      const response = await fetch("https://altrion-server.vercel.app/enrollments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,9 @@ const CourseDetails = () => {
                   <span className="text-lg font-semibold">
                     {course.rating ? course.rating.toFixed(1) : "New"}
                   </span>
-                  <span className="text-gray-600">({course.enrolledStudents || 0} reviews)</span>
+                  <span className="text-gray-600">
+                    ({course.enrolledStudents || 0} reviews)
+                  </span>
                 </div>
                 <div className="flex items-center space-x-2 text-gray-600">
                   <Users size={20} />
@@ -121,7 +123,10 @@ const CourseDetails = () => {
                   <p className="text-sm text-gray-600 mb-2">Instructor</p>
                   <div className="flex items-center space-x-3">
                     <img
-                      src={course.instructor.photo || "https://via.placeholder.com/48"}
+                      src={
+                        course.instructor.photo ||
+                        "https://via.placeholder.com/48"
+                      }
                       alt={course.instructor.name}
                       className="w-12 h-12 rounded-full object-cover"
                       onError={(e) => {
@@ -207,7 +212,9 @@ const CourseDetails = () => {
                   <Clock className="w-6 h-6 text-indigo-600" />
                   <div>
                     <p className="text-sm text-gray-600">Duration</p>
-                    <p className="font-semibold text-gray-900">{course.duration}</p>
+                    <p className="font-semibold text-gray-900">
+                      {course.duration}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">

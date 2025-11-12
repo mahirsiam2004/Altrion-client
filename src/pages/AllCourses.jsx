@@ -17,7 +17,9 @@ const AllCourses = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/categories");
+        const response = await fetch(
+          "https://altrion-server.vercel.app/categories"
+        );
         const data = await response.json();
         console.log("Categories fetched:", data); // Debug log
         setCategories(["All", ...data]);
@@ -75,7 +77,7 @@ const AllCourses = () => {
 
         // Fetch filtered data from server
         const response = await fetch(
-          `http://localhost:3000/courses?${params.toString()}`
+          `https://altrion-server.vercel.app/courses?${params.toString()}`
         );
         const data = await response.json();
         setFilteredCourses(data);

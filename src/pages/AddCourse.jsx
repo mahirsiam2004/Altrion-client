@@ -1,7 +1,14 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { BookOpen, DollarSign, Clock, Image, Tag, FileText } from "lucide-react";
+import {
+  BookOpen,
+  DollarSign,
+  Clock,
+  Image,
+  Tag,
+  FileText,
+} from "lucide-react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 
@@ -61,7 +68,7 @@ const AddCourse = () => {
         },
       };
 
-      const response = await fetch("http://localhost:3000/courses", {
+      const response = await fetch("https://altrion-server.vercel.app/courses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,9 +103,7 @@ const AddCourse = () => {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Add New Course
             </h1>
-            <p className="text-gray-600">
-              Share your knowledge with the world
-            </p>
+            <p className="text-gray-600">Share your knowledge with the world</p>
           </div>
 
           {/* Instructor Info (Auto-filled) */}

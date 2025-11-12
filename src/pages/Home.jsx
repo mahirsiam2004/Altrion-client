@@ -12,7 +12,7 @@ export const Home = () => {
 
   useEffect(() => {
     // Fetch featured courses
-    fetch("http://localhost:3000/courses/featured")
+    fetch("https://altrion-server.vercel.app/courses/featured")
       .then((res) => res.json())
       .then((data) => {
         setPopularCourses(data);
@@ -143,13 +143,15 @@ export const Home = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 text-center">{feature.description}</p>
+                <p className="text-gray-600 text-center">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
-   <Showcase3D></Showcase3D>
+      <Showcase3D></Showcase3D>
       {/* Top Instructors Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -220,7 +222,9 @@ export const Home = () => {
                 </p>
                 <div className="flex justify-center space-x-6 text-sm text-gray-600">
                   <div>
-                    <p className="font-bold text-gray-900">{instructor.courses}</p>
+                    <p className="font-bold text-gray-900">
+                      {instructor.courses}
+                    </p>
                     <p>Courses</p>
                   </div>
                   <div>
@@ -235,7 +239,6 @@ export const Home = () => {
           </div>
         </div>
       </section>
-   
     </div>
   );
 };

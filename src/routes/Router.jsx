@@ -35,7 +35,10 @@ export const Router = createBrowserRouter([
       {
         path: "/courses",
         element: <AllCourses />,
-        loader: () => fetch("http://localhost:3000/courses"),
+        loader: () =>
+          fetch(
+            "https://altrion-server.vercel.app/courses"
+          ),
       },
       {
         path: "/course/:id",
@@ -45,7 +48,9 @@ export const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/courses/${params.id}`),
+          fetch(
+            `https://altrion-server.vercel.app/courses/${params.id}`
+          ),
       },
       {
         path: "/add-course",
@@ -79,7 +84,9 @@ export const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/courses/${params.id}`),
+          fetch(
+            `https://altrion-server.vercel.app/courses/${params.id}`
+          ),
       },
       {
         path: "/dashboard",

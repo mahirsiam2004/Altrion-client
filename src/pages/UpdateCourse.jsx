@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLoaderData } from "react-router-dom";
 import { motion } from "framer-motion";
-import { BookOpen, DollarSign, Clock, Image, Tag, FileText } from "lucide-react";
+import {
+  BookOpen,
+  DollarSign,
+  Clock,
+  Image,
+  Tag,
+  FileText,
+} from "lucide-react";
 import { toast } from "react-toastify";
 
 const UpdateCourse = () => {
@@ -49,16 +56,13 @@ const UpdateCourse = () => {
         instructor: course.instructor, // Keep original instructor
       };
 
-      const response = await fetch(
-        `http://localhost:3000/courses/${course._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        }
-      );
+      const response = await fetch(`https://altrion-server.vercel.app/courses/${course._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to update course");

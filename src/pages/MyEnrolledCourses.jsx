@@ -17,9 +17,7 @@ const MyEnrolledCourses = () => {
 
   const fetchEnrolledCourses = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/enrollments/${user.email}`
-      );
+      const response = await fetch(`https://altrion-server.vercel.app/enrollments/${user.email}`);
       const data = await response.json();
       setCourses(data);
       setLoading(false);
@@ -46,9 +44,7 @@ const MyEnrolledCourses = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             My Enrolled Courses
           </h1>
-          <p className="text-gray-600">
-            Continue your learning journey
-          </p>
+          <p className="text-gray-600">Continue your learning journey</p>
         </div>
 
         {/* Courses */}

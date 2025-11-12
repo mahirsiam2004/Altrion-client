@@ -47,7 +47,7 @@ const Showcase3D = () => {
               {/* Face 1 – Logo */}
               <div className="cube__face cube__face--front">
                 <img
-                  src="/src/assets/logo.png"
+                  src="https://i.postimg.cc/25xWSLjD/Screenshot-from-2025-11-12-21-15-53-removebg-preview-2.png"
                   alt="Altrion Logo"
                   className="cube-logo"
                 />
@@ -71,7 +71,7 @@ const Showcase3D = () => {
               <div className="cube__face cube__face--right">
                 <div className="cube-img-wrapper">
                   <img
-                    src="/src/assets/mahir.jpeg"
+                    src="https://i.postimg.cc/25xWSLjD/Screenshot-from-2025-11-12-21-15-53-removebg-preview-2.png"
                     alt="mahir siam"
                     className="cube-img"
                   />
@@ -83,7 +83,7 @@ const Showcase3D = () => {
               <div className="cube__face cube__face--left">
                 <div className="cube-img-wrapper">
                   <img
-                    src="https://plus.unsplash.com/premium_photo-1720032305159-28f237187095?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+                    src="https://i.postimg.cc/25xWSLjD/Screenshot-from-2025-11-12-21-15-53-removebg-preview-2.png"
                     className="cube-img"
                   />
                 </div>
@@ -94,7 +94,7 @@ const Showcase3D = () => {
               <div className="cube__face cube__face--top">
                 <div className="cube-img-wrapper">
                   <img
-                    src="https://plus.unsplash.com/premium_photo-1738424351934-5c1d497f5d85?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+                    src="https://i.postimg.cc/25xWSLjD/Screenshot-from-2025-11-12-21-15-53-removebg-preview-2.png"
                     alt="Certificate"
                     className="cube-img"
                   />
@@ -106,7 +106,7 @@ const Showcase3D = () => {
               <div className="cube__face cube__face--bottom">
                 <div className="cube-img-wrapper">
                   <img
-                    src="/src/assets/dash.png"
+                    src="https://i.postimg.cc/25xWSLjD/Screenshot-from-2025-11-12-21-15-53-removebg-preview-2.png"
                     className="cube-img"
                   />
                 </div>
