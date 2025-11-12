@@ -4,7 +4,7 @@ import "./Showcase3D.css";
 
 const Showcase3D = () => {
   return (
-    <section className="showcase-section">
+    <section className="showcase-section ">
       <div className="showcase-container">
         {/* TEXT */}
         <motion.article
@@ -43,8 +43,8 @@ const Showcase3D = () => {
           className="showcase-cube-wrapper"
         >
           <div className="cube-scene">
-            <div className="cube">
-              {/* Face 1 – Logo */}
+            <div className="cube mt-20 ">
+            
               <div className="cube__face cube__face--front">
                 <img
                   src="https://i.postimg.cc/25xWSLjD/Screenshot-from-2025-11-12-21-15-53-removebg-preview-2.png"
@@ -53,7 +53,7 @@ const Showcase3D = () => {
                 />
               </div>
 
-              {/* Face 2 – Stats */}
+           
               <div className="cube__face cube__face--back">
                 <div className="cube-stats">
                   <p className="stat">12k+</p>
@@ -65,7 +65,7 @@ const Showcase3D = () => {
                 </div>
               </div>
 
-              {/* Face 3 – Instructor */}
+              
               <div className="cube__face cube__face--right">
                 <div className="cube-img-wrapper">
                   <img
@@ -77,7 +77,7 @@ const Showcase3D = () => {
                 <p className="cube-caption">Meet Mahir Siam</p>
               </div>
 
-              {/* Face 4 – Course */}
+              
               <div className="cube__face cube__face--left">
                 <div className="cube-img-wrapper">
                   <img
@@ -89,7 +89,7 @@ const Showcase3D = () => {
                 <p className="cube-caption">React Mastery 2025</p>
               </div>
 
-              {/* Face 5 – Certificate */}
+           
               <div className="cube__face cube__face--top">
                 <div className="cube-img-wrapper">
                   <img
@@ -101,7 +101,7 @@ const Showcase3D = () => {
                 <p className="cube-caption">Downloadable Certificate</p>
               </div>
 
-              {/* Face 6 – Dashboard */}
+             
               <div className="cube__face cube__face--bottom">
                 <div className="cube-img-wrapper">
                   <img

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Edit, Trash2, Eye, Plus } from "lucide-react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const MyCourses = () => {
   const { user } = useContext(AuthContext);
@@ -31,29 +32,52 @@ const MyCourses = () => {
     }
   };
 
-  const handleDelete = async (id, title) => {
-    const confirm = window.confirm(
-      `Are you sure you want to delete "${title}"?`
+const handleDelete = async (id, title) => {
+  const result = await Swal.fire({
+    title: "Are you sure?",
+    text: `Do you really want to delete "${title}"? This action cannot be undone.`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "Cancel",
+  });
+
+  if (!result.isConfirmed) return;
+
+  try {
+    const response = await fetch(
+      `https://altrion-server.vercel.app/courses/${id}`,
+      {
+        method: "DELETE",
+      }
     );
 
-    if (!confirm) return;
-
-    try {
-      const response = await fetch(`https://altrion-server.vercel.app/courses/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete course");
-      }
-
-      toast.success("Course deleted successfully!");
-      setCourses(courses.filter((course) => course._id !== id));
-    } catch (error) {
-      console.error("Error deleting course:", error);
-      toast.error("Failed to delete course");
+    if (!response.ok) {
+      throw new Error("Failed to delete course");
     }
-  };
+
+    setCourses(courses.filter((course) => course._id !== id));
+
+    Swal.fire({
+      title: "Deleted!",
+      text: `"${title}" has been deleted successfully.`,
+      icon: "success",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+  } catch (error) {
+    console.error("Error deleting course:", error);
+    Swal.fire({
+      title: "Error!",
+      text: "Failed to delete course. Please try again later.",
+      icon: "error",
+      confirmButtonColor: "#3085d6",
+    });
+  }
+};
+
 
   if (loading) {
     return (
@@ -156,7 +180,9 @@ const MyCourses = () => {
                         </span>
                       </div>
                       <div>{course.duration}</div>
-                      <div>{course.enrolledStudents || 0} students enrolled</div>
+                      <div>
+                        {course.enrolledStudents || 0} students enrolled
+                      </div>
                     </div>
 
                     {/* Action Buttons */}

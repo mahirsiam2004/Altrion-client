@@ -5,6 +5,7 @@ import Banner from "../components/Banner";
 import CourseCard from "../components/CourseCard";
 import { Users, Award, BookOpen, TrendingUp } from "lucide-react";
 import Showcase3D from "../components/Showcase3D";
+import Review from "./Review";
 
 export const Home = () => {
   const [popularCourses, setPopularCourses] = useState([]);
@@ -151,8 +152,10 @@ export const Home = () => {
           </div>
         </div>
       </section>
+
       <Showcase3D></Showcase3D>
-      {/* Top Instructors Section */}
+      <Review></Review>
+
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -172,9 +175,10 @@ export const Home = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                name: "Sarah Johnson",
+                name: "Jhankar Mahbub",
                 role: "Web Development Expert",
-                image: "https://randomuser.me/api/portraits/women/1.jpg",
+                image:
+                  "https://imgs.search.brave.com/z4LF6n0yDRml0zIX-H4rylxID7Hi1ZUvTMNBBsNBDEU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dGJzbmV3cy5uZXQv/c2l0ZXMvZGVmYXVs/dC9maWxlcy9zdHls/ZXMvaW5mb2dyYXBo/L3B1YmxpYy9pbWFn/ZXMvMjAyMS8wNy8w/OC9pbWdfMjg0Ml8w/LmpwZw",
                 courses: 25,
                 students: 10500,
               },

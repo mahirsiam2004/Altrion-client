@@ -82,7 +82,7 @@ export const Navbar = () => {
                   {user.photoURL ? (
                     <img
                       src={user.photoURL}
-                      alt={user.displayName}
+                      alt={user?.displayName}
                       className="w-10 h-10 rounded-full border-2 border-indigo-500"
                       onError={(e) => {
                         e.target.src = 'https://via.placeholder.com/40';
@@ -94,7 +94,7 @@ export const Navbar = () => {
                     </div>
                   )}
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {user.displayName || 'User'}
+                    {user?.displayName || 'User'}
                   </span>
                 </Link>
                 <button

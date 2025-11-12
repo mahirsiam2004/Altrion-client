@@ -4,52 +4,83 @@ import { motion } from "framer-motion";
 import { Star, Clock, Users, Award, BookOpen, CheckCircle } from "lucide-react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const CourseDetails = () => {
   const course = useLoaderData();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleEnroll = async () => {
-    if (!user) {
-      toast.error("Please login to enroll in this course");
-      navigate("/signin");
+const handleEnroll = async () => {
+  if (!user) {
+    Swal.fire({
+      title: "Login required",
+      text: "Please sign in to enroll in this course.",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "Go to Sign In",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#4F46E5",
+    }).then((res) => {
+      if (res.isConfirmed) navigate("/signin");
+    });
+    return;
+  }
+
+  try {
+    const enrollment = {
+      courseId: course._id,
+      userEmail: user.email,
+      userName: user.displayName,
+      courseTitle: course.title,
+    };
+
+    const response = await fetch(
+      "https://altrion-server.vercel.app/enrollments",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(enrollment),
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.status === 400) {
+      // Already enrolled
+      await Swal.fire({
+        title: "You're already enrolled",
+        text: `You're already enrolled in "${course.title}".`,
+        icon: "info",
+        confirmButtonColor: "#4F46E5",
+      });
       return;
     }
 
-    try {
-      const enrollment = {
-        courseId: course._id,
-        userEmail: user.email,
-        userName: user.displayName,
-        courseTitle: course.title,
-      };
+    if (!response.ok) throw new Error(data?.message || "Enrollment failed");
 
-      const response = await fetch("https://altrion-server.vercel.app/enrollments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(enrollment),
-      });
+    // Success!
+    await Swal.fire({
+      title: "Enrolled! 🎉",
+      html: `<div style="font-size:14px;color:#4b5563">
+               You have successfully enrolled in <b>${course.title}</b>.
+             </div>`,
+      icon: "success",
+      confirmButtonText: "Awesome!",
+      confirmButtonColor: "#22C55E",
+      backdrop: true,
+    });
+  } catch (error) {
+    console.error("Enrollment error:", error);
+    Swal.fire({
+      title: "Enrollment failed",
+      text: "Something went wrong. Please try again.",
+      icon: "error",
+      confirmButtonColor: "#EF4444",
+    });
+  }
+};
 
-      const data = await response.json();
-
-      if (response.status === 400) {
-        toast.info("You are already enrolled in this course!");
-        return;
-      }
-
-      if (!response.ok) {
-        throw new Error("Enrollment failed");
-      }
-
-      toast.success("Successfully enrolled in the course! 🎉");
-    } catch (error) {
-      console.error("Enrollment error:", error);
-      toast.error("Failed to enroll. Please try again.");
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">

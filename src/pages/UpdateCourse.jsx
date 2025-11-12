@@ -10,6 +10,7 @@ import {
   FileText,
 } from "lucide-react";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const UpdateCourse = () => {
   const course = useLoaderData();
@@ -45,38 +46,54 @@ const UpdateCourse = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const updatedData = {
-        ...formData,
-        price: parseFloat(formData.price),
-        instructor: course.instructor, // Keep original instructor
-      };
+  try {
+    const updatedData = {
+      ...formData,
+      price: parseFloat(formData.price),
+      instructor: course.instructor, // Keep original instructor
+    };
 
-      const response = await fetch(`https://altrion-server.vercel.app/courses/${course._id}`, {
+    const response = await fetch(
+      `https://altrion-server.vercel.app/courses/${course._id}`,
+      {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update course");
       }
+    );
 
-      toast.success("Course updated successfully! 🎉");
-      navigate("/my-courses");
-    } catch (error) {
-      console.error("Error updating course:", error);
-      toast.error("Failed to update course. Please try again.");
-    } finally {
-      setLoading(false);
+    if (!response.ok) {
+      throw new Error("Failed to update course");
     }
-  };
+
+    // ✅ Success alert using SweetAlert2
+    Swal.fire({
+      title: "Course Updated!",
+      text: "Your course has been updated successfully 🎉",
+      icon: "success",
+      confirmButtonColor: "#4F46E5",
+      confirmButtonText: "Go to My Courses",
+    }).then(() => {
+      navigate("/my-courses");
+    });
+  } catch (error) {
+    console.error("Error updating course:", error);
+    Swal.fire({
+      title: "Error!",
+      text: "Failed to update course. Please try again later.",
+      icon: "error",
+      confirmButtonColor: "#d33",
+    });
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
