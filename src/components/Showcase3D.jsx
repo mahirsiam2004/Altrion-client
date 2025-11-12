@@ -6,7 +6,7 @@ const Showcase3D = () => {
   return (
     <section className="showcase-section">
       <div className="showcase-container">
-        {/* ---------- TEXT ---------- */}
+        {/* TEXT */}
         <motion.article
           initial={{ opacity: 0, x: -80 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -34,7 +34,7 @@ const Showcase3D = () => {
           </motion.a>
         </motion.article>
 
-        {/* ---------- 3-D CUBE ---------- */}
+        {/* 3D CUBE */}
         <motion.div
           initial={{ opacity: 0, scale: 0.75 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -58,10 +58,8 @@ const Showcase3D = () => {
                 <div className="cube-stats">
                   <p className="stat">12k+</p>
                   <p className="label">Active Learners</p>
-
                   <p className="stat">350+</p>
                   <p className="label">Expert Courses</p>
-
                   <p className="stat">4.9 stars</p>
                   <p className="label">Avg. Rating</p>
                 </div>
@@ -72,18 +70,19 @@ const Showcase3D = () => {
                 <div className="cube-img-wrapper">
                   <img
                     src="https://i.postimg.cc/25xWSLjD/Screenshot-from-2025-11-12-21-15-53-removebg-preview-2.png"
-                    alt="mahir siam"
+                    alt="Mahir Siam"
                     className="cube-img"
                   />
                 </div>
                 <p className="cube-caption">Meet Mahir Siam</p>
               </div>
 
-              {/* Face 4 – Course Preview */}
+              {/* Face 4 – Course */}
               <div className="cube__face cube__face--left">
                 <div className="cube-img-wrapper">
                   <img
                     src="https://i.postimg.cc/25xWSLjD/Screenshot-from-2025-11-12-21-15-53-removebg-preview-2.png"
+                    alt="React Mastery"
                     className="cube-img"
                   />
                 </div>
@@ -107,6 +106,7 @@ const Showcase3D = () => {
                 <div className="cube-img-wrapper">
                   <img
                     src="https://i.postimg.cc/25xWSLjD/Screenshot-from-2025-11-12-21-15-53-removebg-preview-2.png"
+                    alt="Dashboard"
                     className="cube-img"
                   />
                 </div>
@@ -123,4 +123,3 @@ const Showcase3D = () => {
 };
 
 export default Showcase3D;
-

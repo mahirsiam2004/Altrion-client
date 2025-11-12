@@ -1,16 +1,76 @@
-# React + Vite
+🎓 Altrion - Online Learning Platform
+A modern, full-stack online learning platform where instructors can create and manage courses, and students can explore, enroll, and continue their learning journey.
+🌐 Live Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Client: https://altrion-platform.netlify.app/
 
-Currently, two official plugins are available:
+✨ Features
+🎯 For Students:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Browse and search from 500+ courses across multiple categories
+Advanced filtering by category and search functionality
+View detailed course information with instructor profiles
+Enroll in courses with one click
+Track enrolled courses in personalized dashboard
+Beautiful, responsive UI with dark/light theme toggle
+Smooth animations powered by GSAP and Framer Motion
 
-## React Compiler
+👨‍🏫 For Instructors:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Create and publish courses with rich details
+Upload course images via imgbb integration
+Manage your courses (Update/Delete)
+Track total students enrolled in your courses
+View comprehensive statistics in dashboard
+Auto-filled instructor information from Firebase profile
 
-## Expanding the ESLint configuration
+🔐 Authentication:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Email/Password registration and login
+Google Sign-In integration
+Password reset functionality
+Protected routes for authenticated users
+Persistent login sessions
+
+🎨 User Experience:
+
+Fully responsive design (Mobile, Tablet, Desktop)
+Dark mode and Light mode toggle
+Beautiful hero banner with marquee effects
+Student testimonials and success stories
+Featured courses showcase
+Real-time toast notifications
+Loading states and error handling
+Custom 404 page
+
+🛠️ Technologies Used
+Frontend:
+
+React 18
+React Router DOM
+Tailwind CSS
+Framer Motion (Animations)
+GSAP (Advanced Animations)
+Lucide React (Icons)
+React Toastify (Notifications)
+React Fast Marquee
+Axios
+
+Backend Integration:
+
+Firebase Authentication
+MongoDB Database
+RESTful API
+
+Deployment:
+
+Netlify (Client)
+Vercel (Server)
+
+
+👨‍💻 Developer
+Mahir Siam
+📧 Email: mahirsiam2004@gmail.com
+
+📄 License
+This project is developed as part of a web development assignment.
