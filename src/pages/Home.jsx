@@ -6,24 +6,45 @@ import CourseCard from "../components/CourseCard";
 import { Users, Award, BookOpen, TrendingUp } from "lucide-react";
 import Showcase3D from "../components/Showcase3D";
 import Review from "./Review";
+import { coursesAPI } from "../services/api";
+import { toast } from "react-toastify";
 
 export const Home = () => {
   const [popularCourses, setPopularCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch featured courses
-    fetch("https://altrion-server.vercel.app/courses/featured")
-      .then((res) => res.json())
-      .then((data) => {
-        setPopularCourses(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching featured courses:", err);
-        setLoading(false);
-      });
+    document.title = "Home - Altrion Learning Platform";
+    fetchFeaturedCourses();
   }, []);
+
+  const fetchFeaturedCourses = async () => {
+    try {
+      setLoading(true);
+
+      // Use the new getFeaturedCourses method
+      const featuredCourses = await coursesAPI.getFeaturedCourses();
+      
+      // Ensure it's an array
+      const coursesArray = Array.isArray(featuredCourses) ? featuredCourses : [];
+      
+      // If no featured courses, get all courses (limited to 6)
+      if (coursesArray.length === 0) {
+        const allCourses = await coursesAPI.getAllCourses();
+        const allCoursesArray = Array.isArray(allCourses) ? allCourses : [];
+        setPopularCourses(allCoursesArray.slice(0, 6));
+      } else {
+        setPopularCourses(coursesArray);
+      }
+      
+    } catch (error) {
+      console.error("Error fetching featured courses:", error);
+      setPopularCourses([]);
+      toast.error("Failed to load courses");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -51,35 +72,53 @@ export const Home = () => {
             <div className="flex justify-center items-center min-h-[400px]">
               <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-indigo-600"></div>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {popularCourses.map((course, index) => (
-                <motion.div
-                  key={course._id}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+          ) : popularCourses.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {popularCourses.map((course, index) => (
+                  <motion.div
+                    key={course._id}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <CourseCard course={course} />
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <Link
+                  to="/courses"
+                  className="inline-block px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-semibold"
                 >
-                  <CourseCard course={course} />
-                </motion.div>
-              ))}
+                  View All Courses
+                </Link>
+              </motion.div>
+            </>
+          ) : (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">📚</div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                No courses available yet
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Be the first to add a course!
+              </p>
+              <Link
+                to="/add-course"
+                className="inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+              >
+                Add Your First Course
+              </Link>
             </div>
           )}
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <Link
-              to="/courses"
-              className="inline-block px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-semibold "
-            >
-              View All Courses
-            </Link>
-          </motion.div>
         </div>
       </section>
 
@@ -153,9 +192,10 @@ export const Home = () => {
         </div>
       </section>
 
-      <Showcase3D></Showcase3D>
-      <Review></Review>
+      <Showcase3D />
+      <Review />
 
+      {/* Top Instructors Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div

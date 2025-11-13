@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import CourseCard from "../components/CourseCard";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
+import { enrollmentsAPI } from "../services/api";
 
 const MyEnrolledCourses = () => {
   const { user } = useContext(AuthContext);
@@ -17,8 +19,7 @@ const MyEnrolledCourses = () => {
 
   const fetchEnrolledCourses = async () => {
     try {
-      const response = await fetch(`https://altrion-server.vercel.app/enrollments/${user.email}`);
-      const data = await response.json();
+      const data = await enrollmentsAPI.getEnrollmentsByUser(user.email);
       setCourses(data);
       setLoading(false);
     } catch (error) {
@@ -61,12 +62,12 @@ const MyEnrolledCourses = () => {
             <p className="text-gray-600 mb-6">
               Start learning by enrolling in a course today
             </p>
-            <a
-              href="/courses"
+            <Link
+              to="/courses"
               className="inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-semibold"
             >
               Browse Courses
-            </a>
+            </Link>
           </motion.div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

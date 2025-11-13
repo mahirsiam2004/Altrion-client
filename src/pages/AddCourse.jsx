@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
+import { coursesAPI } from "../services/api";
 
 const AddCourse = () => {
   const { user } = useContext(AuthContext);
@@ -68,23 +69,13 @@ const AddCourse = () => {
         },
       };
 
-      const response = await fetch("https://altrion-server.vercel.app/courses", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(courseData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add course");
-      }
+      await coursesAPI.createCourse(courseData);
 
       toast.success("Course added successfully! 🎉");
       navigate("/my-courses");
     } catch (error) {
       console.error("Error adding course:", error);
-      toast.error("Failed to add course. Please try again.");
+      toast.error(error.response?.data?.message || "Failed to add course. Please try again.");
     } finally {
       setLoading(false);
     }

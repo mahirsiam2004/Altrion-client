@@ -12,6 +12,8 @@ import {
   Clock,
 } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
+import { coursesAPI, enrollmentsAPI } from "../services/api";
+import { toast } from "react-toastify";
 
 export const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -23,6 +25,8 @@ export const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = "Dashboard - Altrion";
+    
     if (user?.email) {
       fetchDashboardStats();
     }
@@ -30,13 +34,35 @@ export const Dashboard = () => {
 
   const fetchDashboardStats = async () => {
     try {
-      // Fetch instructor's courses
-      const coursesRes = await fetch(`https://altrion-server.vercel.app/courses/instructor/${user.email}`);
-      const coursesData = await coursesRes.json();
+      setLoading(true);
 
-      // Fetch enrolled courses
-      const enrolledRes = await fetch(`https://altrion-server.vercel.app/enrollments/${user.email}`);
-      const enrolledData = await enrolledRes.json();
+      // Fetch instructor's courses using Axios
+      let coursesData = [];
+      try {
+        coursesData = await coursesAPI.getCoursesByInstructor(user.email);
+        // Ensure it's an array
+        if (!Array.isArray(coursesData)) {
+          console.warn('Courses data is not an array:', coursesData);
+          coursesData = [];
+        }
+      } catch (err) {
+        console.error('Failed to fetch instructor courses:', err);
+        coursesData = [];
+      }
+
+      // Fetch enrolled courses using Axios
+      let enrolledData = [];
+      try {
+        enrolledData = await enrollmentsAPI.getEnrollmentsByUser(user.email);
+        // Ensure it's an array
+        if (!Array.isArray(enrolledData)) {
+          console.warn('Enrolled data is not an array:', enrolledData);
+          enrolledData = [];
+        }
+      } catch (err) {
+        console.error('Failed to fetch enrollments:', err);
+        enrolledData = [];
+      }
 
       // Calculate total students
       const totalStudents = coursesData.reduce(
@@ -50,9 +76,10 @@ export const Dashboard = () => {
         totalStudents: totalStudents,
       });
 
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching dashboard stats:", error);
+      toast.error("Failed to load dashboard data");
+    } finally {
       setLoading(false);
     }
   };
@@ -199,7 +226,7 @@ export const Dashboard = () => {
               >
                 <Link
                   to={link.link}
-                  className={`block ${link.bgColor} dark:bg-gray-500 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all group`}
+                  className={`block ${link.bgColor} dark:bg-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all group`}
                 >
                   <div
                     className={`w-16 h-16 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center text-white mb-4 shadow-lg group-hover:scale-110 transition-transform`}
@@ -224,7 +251,7 @@ export const Dashboard = () => {
             transition={{ delay: 0.5 }}
             className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg"
           >
-            <p className="text-sm text-blue-800 dark:text-blue-500">
+            <p className="text-sm text-blue-800 dark:text-blue-300">
               💡 <strong>Tip:</strong> To update a course, go to "My Courses"
               and click the "Update" button on any course card.
             </p>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Edit, Trash2, Eye, Plus } from "lucide-react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
+import { coursesAPI } from "../services/api";
 import Swal from "sweetalert2";
 
 const MyCourses = () => {
@@ -19,10 +20,7 @@ const MyCourses = () => {
 
   const fetchMyCourses = async () => {
     try {
-      const response = await fetch(
-        `https://altrion-server.vercel.app/courses/instructor/${user.email}`
-      );
-      const data = await response.json();
+      const data = await coursesAPI.getCoursesByInstructor(user.email);
       setCourses(data);
       setLoading(false);
     } catch (error) {
@@ -32,52 +30,42 @@ const MyCourses = () => {
     }
   };
 
-const handleDelete = async (id, title) => {
-  const result = await Swal.fire({
-    title: "Are you sure?",
-    text: `Do you really want to delete "${title}"? This action cannot be undone.`,
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#d33",
-    cancelButtonColor: "#3085d6",
-    confirmButtonText: "Yes, delete it!",
-    cancelButtonText: "Cancel",
-  });
+  const handleDelete = async (id, title) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: `Do you really want to delete "${title}"? This action cannot be undone.`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    });
 
-  if (!result.isConfirmed) return;
+    if (!result.isConfirmed) return;
 
-  try {
-    const response = await fetch(
-      `https://altrion-server.vercel.app/courses/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    try {
+      await coursesAPI.deleteCourse(id);
 
-    if (!response.ok) {
-      throw new Error("Failed to delete course");
+      setCourses(courses.filter((course) => course._id !== id));
+
+      Swal.fire({
+        title: "Deleted!",
+        text: `"${title}" has been deleted successfully.`,
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      console.error("Error deleting course:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to delete course. Please try again later.",
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+      });
     }
-
-    setCourses(courses.filter((course) => course._id !== id));
-
-    Swal.fire({
-      title: "Deleted!",
-      text: `"${title}" has been deleted successfully.`,
-      icon: "success",
-      timer: 2000,
-      showConfirmButton: false,
-    });
-  } catch (error) {
-    console.error("Error deleting course:", error);
-    Swal.fire({
-      title: "Error!",
-      text: "Failed to delete course. Please try again later.",
-      icon: "error",
-      confirmButtonColor: "#3085d6",
-    });
-  }
-};
-
+  };
 
   if (loading) {
     return (

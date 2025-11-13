@@ -1,5 +1,5 @@
+// src/routes/Router.jsx
 import { createBrowserRouter } from "react-router-dom";
-
 import { Home } from "../pages/Home";
 import { Signin } from "../pages/Signin";
 import { Signup } from "../pages/Signup";
@@ -13,6 +13,8 @@ import MyCourses from "../pages/MyCourses";
 import MyEnrolledCourses from "../pages/MyEnrolledCourses";
 import UpdateCourse from "../pages/UpdateCourse";
 import NotFound from "../pages/NotFound";
+
+import { coursesAPI } from "../services/api";
 import MainLayout from "../layourts/MainLayout";
 
 export const Router = createBrowserRouter([
@@ -35,10 +37,15 @@ export const Router = createBrowserRouter([
       {
         path: "/courses",
         element: <AllCourses />,
-        loader: () =>
-          fetch(
-            "https://altrion-server.vercel.app/courses"
-          ),
+        loader: async () => {
+          try {
+            const data = await coursesAPI.getAllCourses();
+            return Array.isArray(data) ? data : [];
+          } catch (error) {
+            console.error('Error loading courses:', error);
+            return []; 
+          }
+        },
       },
       {
         path: "/course/:id",
@@ -47,10 +54,14 @@ export const Router = createBrowserRouter([
             <CourseDetails />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(
-            `https://altrion-server.vercel.app/courses/${params.id}`
-          ),
+        loader: async ({ params }) => {
+          try {
+            return await coursesAPI.getCourseById(params.id);
+          } catch (error) {
+            console.error('Error loading course:', error);
+            throw new Response("Course not found", { status: 404 });
+          }
+        },
       },
       {
         path: "/add-course",
@@ -83,10 +94,14 @@ export const Router = createBrowserRouter([
             <UpdateCourse />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(
-            `https://altrion-server.vercel.app/courses/${params.id}`
-          ),
+        loader: async ({ params }) => {
+          try {
+            return await coursesAPI.getCourseById(params.id);
+          } catch (error) {
+            console.error('Error loading course:', error);
+            throw new Response("Course not found", { status: 404 });
+          }
+        },
       },
       {
         path: "/dashboard",
