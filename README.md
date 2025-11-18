@@ -1,7 +1,7 @@
 🎓 Altrion - Online Learning Platform
 A modern, full-stack online learning platform where instructors can create and manage courses, and students can explore, enroll, and continue their learning journey.
-🌐 Live Demo
 
+🌐 Live Demo
 Client: https://altrion-platform.netlify.app/
 
 ✨ Features
