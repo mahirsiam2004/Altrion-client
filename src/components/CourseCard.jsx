@@ -37,7 +37,7 @@ const CourseCard = ({ course }) => {
         </span>
 
         {/* Title */}
-        <h2 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100 line-clamp-2">
+        <h2 className="text-xl font-bold mb-2 text-gray-700 dark:text-gray-100 line-clamp-2">
           {course.title}
         </h2>
 
