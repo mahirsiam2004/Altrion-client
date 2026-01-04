@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import CourseCard from "../components/CourseCard";
+import CourseCardSkeleton from "../components/CourseCardSkeleton";
 import gsap from "gsap";
-import { Filter, Search, X } from "lucide-react";
+import { Filter, Search, X, ArrowUpDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 const AllCourses = () => {
   const initialData = useLoaderData();
@@ -11,6 +12,9 @@ const AllCourses = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sortBy, setSortBy] = useState("default");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [coursesPerPage] = useState(12);
   const gridRef = useRef(null);
 
   // Fetch categories
@@ -58,7 +62,7 @@ const AllCourses = () => {
     }
   }, [filteredCourses]);
 
-  // Filter courses
+  // Filter and sort courses
   useEffect(() => {
     const filterCourses = async () => {
       setLoading(true);
@@ -80,7 +84,11 @@ const AllCourses = () => {
           `https://altrion-server.vercel.app/courses?${params.toString()}`
         );
         const data = await response.json();
-        setFilteredCourses(data);
+        let courses = Array.isArray(data) ? data : [];
+
+        // Client-side sorting
+        courses = sortCourses(courses, sortBy);
+        setFilteredCourses(courses);
       } catch (error) {
         console.error("Error filtering courses:", error);
         // Fallback to client-side filtering if server fails
@@ -98,14 +106,36 @@ const AllCourses = () => {
           );
         }
 
+        filtered = sortCourses(filtered, sortBy);
         setFilteredCourses(filtered);
       } finally {
         setLoading(false);
+        setCurrentPage(1); // Reset to first page when filters change
       }
     };
 
     filterCourses();
-  }, [selectedCategory, searchTerm, initialData]);
+  }, [selectedCategory, searchTerm, sortBy, initialData]);
+
+  const sortCourses = (courses, sortOption) => {
+    const sorted = [...courses];
+    switch (sortOption) {
+      case "price-low":
+        return sorted.sort((a, b) => (a.price || 0) - (b.price || 0));
+      case "price-high":
+        return sorted.sort((a, b) => (b.price || 0) - (a.price || 0));
+      case "rating":
+        return sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      case "students":
+        return sorted.sort((a, b) => (b.enrolledStudents || 0) - (a.enrolledStudents || 0));
+      case "title-asc":
+        return sorted.sort((a, b) => a.title.localeCompare(b.title));
+      case "title-desc":
+        return sorted.sort((a, b) => b.title.localeCompare(a.title));
+      default:
+        return sorted;
+    }
+  };
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -130,9 +160,9 @@ const AllCourses = () => {
 
         {/* Filters Section */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8 transition-colors duration-300">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-4">
             {/* Search Bar */}
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-6">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Search Courses
               </label>
@@ -149,7 +179,7 @@ const AllCourses = () => {
             </div>
 
             {/* Category Filter */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-3">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 <Filter className="w-4 h-4 inline-block mr-1" />
                 Filter by Category
@@ -168,6 +198,27 @@ const AllCourses = () => {
                     </option>
                   ))
                 )}
+              </select>
+            </div>
+
+            {/* Sort Filter */}
+            <div className="lg:col-span-3">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <ArrowUpDown className="w-4 h-4 inline-block mr-1" />
+                Sort By
+              </label>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 cursor-pointer transition-colors duration-300"
+              >
+                <option value="default">Default</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+                <option value="students">Most Enrolled</option>
+                <option value="title-asc">Title: A to Z</option>
+                <option value="title-desc">Title: Z to A</option>
               </select>
             </div>
           </div>
@@ -226,18 +277,88 @@ const AllCourses = () => {
 
         {/* Courses Grid */}
         {loading ? (
-          <div className="flex justify-center items-center min-h-[400px]">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-indigo-600"></div>
-          </div>
-        ) : filteredCourses.length > 0 ? (
-          <div
-            ref={gridRef}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {filteredCourses.map((course) => (
-              <CourseCard key={course._id} course={course} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {[...Array(8)].map((_, i) => (
+              <CourseCardSkeleton key={i} />
             ))}
           </div>
+        ) : filteredCourses.length > 0 ? (
+          <>
+            <div
+              ref={gridRef}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+            >
+              {filteredCourses
+                .slice(
+                  (currentPage - 1) * coursesPerPage,
+                  currentPage * coursesPerPage
+                )
+                .map((course) => (
+                  <CourseCard key={course._id} course={course} />
+                ))}
+            </div>
+
+            {/* Pagination */}
+            {Math.ceil(filteredCourses.length / coursesPerPage) > 1 && (
+              <div className="mt-12 flex items-center justify-center space-x-2">
+                <button
+                  onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+
+                {[...Array(Math.ceil(filteredCourses.length / coursesPerPage))].map(
+                  (_, index) => {
+                    const page = index + 1;
+                    if (
+                      page === 1 ||
+                      page === Math.ceil(filteredCourses.length / coursesPerPage) ||
+                      (page >= currentPage - 1 && page <= currentPage + 1)
+                    ) {
+                      return (
+                        <button
+                          key={page}
+                          onClick={() => setCurrentPage(page)}
+                          className={`px-4 py-2 rounded-lg transition-colors ${
+                            currentPage === page
+                              ? "bg-indigo-600 text-white"
+                              : "border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      );
+                    } else if (
+                      page === currentPage - 2 ||
+                      page === currentPage + 2
+                    ) {
+                      return <span key={page} className="px-2">...</span>;
+                    }
+                    return null;
+                  }
+                )}
+
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) =>
+                      Math.min(
+                        Math.ceil(filteredCourses.length / coursesPerPage),
+                        prev + 1
+                      )
+                    )
+                  }
+                  disabled={
+                    currentPage === Math.ceil(filteredCourses.length / coursesPerPage)
+                  }
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="text-center py-20">
             <div className="text-6xl mb-4">📚</div>

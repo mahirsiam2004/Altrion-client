@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, BookOpen, LogOut, User } from 'lucide-react';
-import { toast } from 'react-toastify';
-import { AuthContext } from '../context/AuthContext';
-import ThemeToggle from './ThemeToggle';
+import React, { useState, useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Menu, X, BookOpen, LogOut, User, Settings } from "lucide-react";
+import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
+import ThemeToggle from "./ThemeToggle";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,11 +12,11 @@ export const Navbar = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      toast.success('Logged out successfully!');
+      toast.success("Logged out successfully!");
       setIsOpen(false);
     } catch (error) {
-      console.error('Logout error:', error);
-      toast.error('Failed to logout');
+      console.error("Logout error:", error);
+      toast.error("Failed to logout");
     }
   };
 
@@ -24,18 +24,22 @@ export const Navbar = () => {
   const closeMenu = () => setIsOpen(false);
 
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/courses', label: 'Courses' },
+    { path: "/", label: "Home" },
+    { path: "/courses", label: "Courses" },
+    { path: "/about", label: "About" },
+    { path: "/blog", label: "Blog" },
+    { path: "/contact", label: "Contact" },
   ];
 
   const authLinks = user
     ? [
-        { path: '/dashboard', label: 'Dashboard' },
+        { path: "/dashboard", label: "Dashboard" },
+        { path: "/my-enrolled-courses", label: "My Learning" },
       ]
     : [];
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors duration-300">
+    <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors duration-300 border-b border-gray-200 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -57,8 +61,8 @@ export const Navbar = () => {
                 className={({ isActive }) =>
                   `font-medium transition-colors ${
                     isActive
-                      ? 'text-indigo-600 dark:text-indigo-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400'
+                      ? "text-indigo-600 dark:text-indigo-400"
+                      : "text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
                   }`
                 }
               >
@@ -71,39 +75,98 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             {/* Theme Toggle */}
             <ThemeToggle />
-            
+
             {user ? (
               <>
                 {/* User Profile Dropdown */}
-                <Link
-                  to="/profile"
-                  className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                >
-                  {user.photoURL ? (
-                    <img
-                      src={user.photoURL}
-                      alt={user?.displayName}
-                      className="w-10 h-10 rounded-full border-2 border-indigo-500"
-                      onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/40';
-                      }}
-                    />
-                  ) : (
-                    <div className="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center">
-                      <User className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                <div className="relative group">
+                  <button className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    {user.photoURL ? (
+                      <img
+                        src={user?.photoURL}
+                        alt={user?.displayName}
+                        className="w-10 h-10 rounded-full border-2 border-indigo-500"
+                        onError={(e) => {
+                          e.target.src = "https://via.placeholder.com/40";
+                        }}
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center">
+                        <User className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                      </div>
+                    )}
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      {user?.displayName || "User"}
+                    </span>
+                    <svg
+                      className="w-4 h-4 text-gray-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  
+                  {/* Dropdown Menu */}
+                  <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="py-2">
+                      <Link
+                        to="/profile"
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        onClick={closeMenu}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <User className="w-4 h-4" />
+                          <span>My Profile</span>
+                        </div>
+                      </Link>
+                      <Link
+                        to="/dashboard"
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        onClick={closeMenu}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <BookOpen className="w-4 h-4" />
+                          <span>Dashboard</span>
+                        </div>
+                      </Link>
+                      <Link
+                        to="/my-courses"
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        onClick={closeMenu}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <BookOpen className="w-4 h-4" />
+                          <span>My Courses</span>
+                        </div>
+                      </Link>
+                      <Link
+                        to="/my-enrolled-courses"
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        onClick={closeMenu}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <BookOpen className="w-4 h-4" />
+                          <span>My Learning</span>
+                        </div>
+                      </Link>
+                      <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center space-x-2"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        <span>Logout</span>
+                      </button>
                     </div>
-                  )}
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {user?.displayName || 'User'}
-                  </span>
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center space-x-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
-                </button>
+                  </div>
+                </div>
               </>
             ) : (
               <>
@@ -146,8 +209,8 @@ export const Navbar = () => {
                 className={({ isActive }) =>
                   `block px-4 py-2 rounded-md ${
                     isActive
-                      ? 'bg-indigo-50 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+                      ? "bg-indigo-50 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400"
+                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
                   }`
                 }
               >
@@ -178,7 +241,7 @@ export const Navbar = () => {
                       alt={user.displayName}
                       className="w-10 h-10 rounded-full border-2 border-indigo-500"
                       onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/40';
+                        e.target.src = "https://via.placeholder.com/40";
                       }}
                     />
                   ) : (
@@ -188,9 +251,11 @@ export const Navbar = () => {
                   )}
                   <div>
                     <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
-                      {user.displayName || 'User'}
+                      {user.displayName || "User"}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {user.email}
+                    </p>
                   </div>
                 </Link>
                 <button

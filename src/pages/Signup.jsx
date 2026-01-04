@@ -257,12 +257,22 @@ export const Signup = () => {
           Sign up with Google
         </button>
 
+        {/* Admin Access Info */}
+        <div className="mt-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-3">
+          <p className="text-xs text-purple-800 dark:text-purple-300 font-semibold mb-1">
+            💡 Admin Access:
+          </p>
+          <p className="text-xs text-purple-700 dark:text-purple-400">
+            Use an email containing "admin" (e.g., admin@test.com) to automatically get admin panel access.
+          </p>
+        </div>
+
         {/* Login Link */}
-        <p className="text-center text-sm text-gray-600 mt-6">
+        <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-6">
           Already have an account?{" "}
           <Link
             to="/signin"
-            className="text-indigo-600 hover:text-indigo-500 font-medium"
+            className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 font-medium"
           >
             Sign in
           </Link>

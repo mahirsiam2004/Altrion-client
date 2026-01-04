@@ -10,6 +10,8 @@ import {
   Award,
   BarChart3,
   Clock,
+  Table,
+  Star,
 } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import { coursesAPI, enrollmentsAPI } from "../services/api";
@@ -23,6 +25,24 @@ export const Dashboard = () => {
     totalStudents: 0,
   });
   const [loading, setLoading] = useState(true);
+  const [recentCourses, setRecentCourses] = useState([]);
+
+  // Sample chart data
+  const enrollmentData = [
+    { month: "Jan", students: 12 },
+    { month: "Feb", students: 19 },
+    { month: "Mar", students: 15 },
+    { month: "Apr", students: 25 },
+    { month: "May", students: 22 },
+    { month: "Jun", students: 30 },
+  ];
+
+  const categoryData = [
+    { category: "Web Dev", courses: 8 },
+    { category: "Data Science", courses: 5 },
+    { category: "Design", courses: 3 },
+    { category: "Marketing", courses: 2 },
+  ];
 
   useEffect(() => {
     document.title = "Dashboard - Altrion";
@@ -75,6 +95,9 @@ export const Dashboard = () => {
         enrolledCourses: enrolledData.length,
         totalStudents: totalStudents,
       });
+
+      // Set recent courses for table
+      setRecentCourses(coursesData.slice(0, 5));
 
     } catch (error) {
       console.error("Error fetching dashboard stats:", error);
@@ -258,11 +281,153 @@ export const Dashboard = () => {
           </motion.div>
         </div>
 
+        {/* Charts Section */}
+        <div className="grid lg:grid-cols-2 gap-6 mb-12">
+          {/* Enrollment Chart */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8"
+          >
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center space-x-2">
+              <BarChart3 className="w-6 h-6" />
+              <span>Student Enrollment Trend</span>
+            </h2>
+            <div className="space-y-4">
+              {enrollmentData.map((item, index) => (
+                <div key={index} className="flex items-center space-x-4">
+                  <div className="w-16 text-sm text-gray-600 dark:text-gray-400">
+                    {item.month}
+                  </div>
+                  <div className="flex-1">
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6">
+                      <div
+                        className="bg-gradient-to-r from-indigo-500 to-purple-600 h-6 rounded-full flex items-center justify-end pr-2"
+                        style={{ width: `${(item.students / 30) * 100}%` }}
+                      >
+                        <span className="text-xs font-semibold text-white">
+                          {item.students}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Category Distribution Chart */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8"
+          >
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center space-x-2">
+              <BarChart3 className="w-6 h-6" />
+              <span>Courses by Category</span>
+            </h2>
+            <div className="space-y-4">
+              {categoryData.map((item, index) => {
+                const total = categoryData.reduce((sum, cat) => sum + cat.courses, 0);
+                const percentage = (item.courses / total) * 100;
+                return (
+                  <div key={index} className="flex items-center space-x-4">
+                    <div className="w-24 text-sm text-gray-600 dark:text-gray-400">
+                      {item.category}
+                    </div>
+                    <div className="flex-1">
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6">
+                        <div
+                          className="bg-gradient-to-r from-purple-500 to-pink-600 h-6 rounded-full flex items-center justify-end pr-2"
+                          style={{ width: `${percentage}%` }}
+                        >
+                          <span className="text-xs font-semibold text-white">
+                            {item.courses}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Data Table */}
+        {recentCourses.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-12"
+          >
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center space-x-2">
+              <Table className="w-6 h-6" />
+              <span>My Courses Overview</span>
+            </h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-200 dark:border-gray-700">
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                      Course Title
+                    </th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                      Category
+                    </th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                      Students
+                    </th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                      Price
+                    </th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                      Rating
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recentCourses.map((course, index) => (
+                    <tr
+                      key={course._id || index}
+                      className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <td className="py-4 px-4 text-gray-900 dark:text-gray-100 font-medium">
+                        {course.title}
+                      </td>
+                      <td className="py-4 px-4 text-gray-600 dark:text-gray-400">
+                        {course.category || "General"}
+                      </td>
+                      <td className="py-4 px-4 text-gray-600 dark:text-gray-400">
+                        {course.enrolledStudents || 0}
+                      </td>
+                      <td className="py-4 px-4 text-gray-600 dark:text-gray-400">
+                        ${course.price || "Free"}
+                      </td>
+                      <td className="py-4 px-4">
+                        <div className="flex items-center space-x-1">
+                          <Star size={16} fill="#facc15" className="text-yellow-400" />
+                          <span className="text-gray-600 dark:text-gray-400">
+                            {course.rating ? course.rating.toFixed(1) : "New"}
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+        )}
+
         {/* Recent Activity */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.7 }}
           className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8"
         >
           <div className="flex items-center justify-between mb-6">

@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { Star, Clock, Users } from "lucide-react";
 
 const CourseCard = ({ course }) => {
+  if (!course) return null;
+
   return (
     <motion.div
-      className="course-card bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full"
+      className="course-card bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 flex flex-col h-full"
       whileHover={{ scale: 1.03, y: -5 }}
       whileTap={{ scale: 0.98 }}
     >
@@ -30,17 +32,17 @@ const CourseCard = ({ course }) => {
       {/* Content */}
       <div className="p-5 flex flex-col flex-grow">
         {/* Category */}
-        <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full mb-3 w-fit">
+        <span className="inline-block px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-xs font-semibold rounded-full mb-3 w-fit">
           {course.category || "General"}
         </span>
 
         {/* Title */}
-        <h2 className="text-xl font-bold mb-2 text-gray-800 line-clamp-2">
+        <h2 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100 line-clamp-2">
           {course.title}
         </h2>
 
         {/* Description */}
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
           {course.description || "No description available."}
         </p>
 
@@ -68,7 +70,7 @@ const CourseCard = ({ course }) => {
         )}
 
         {/* Stats */}
-        <div className="flex items-center justify-between mb-4 text-sm text-gray-600">
+        <div className="flex items-center justify-between mb-4 text-sm text-gray-600 dark:text-gray-400">
           <div className="flex items-center space-x-1">
             <Clock className="w-4 h-4" />
             <span>{course.duration || "Self-paced"}</span>
@@ -83,11 +85,11 @@ const CourseCard = ({ course }) => {
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-1">
             <Star size={16} fill="#facc15" className="text-yellow-400" />
-            <span className="text-sm font-semibold text-gray-700">
+            <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
               {course.rating ? course.rating.toFixed(1) : "New"}
             </span>
           </div>
-          <span className="text-2xl font-bold text-green-600">
+          <span className="text-2xl font-bold text-green-600 dark:text-green-400">
             ${course.price || "Free"}
           </span>
         </div>
@@ -95,7 +97,7 @@ const CourseCard = ({ course }) => {
         {/* View Details Button */}
         <Link
           to={`/course/${course._id}`}
-          className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors text-center font-semibold"
+          className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition-colors text-center font-semibold"
         >
           View Details
         </Link>

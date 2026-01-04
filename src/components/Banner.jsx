@@ -132,7 +132,7 @@ const Banner = () => {
   return (
     <div
       ref={bannerRef}
-      className="relative min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 overflow-hidden flex items-center"
+      className="relative min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900 overflow-hidden flex items-center"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -202,7 +202,7 @@ const Banner = () => {
             {/* Title */}
             <h1
               ref={titleRef}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight"
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
             >
               Transform Your
               <motion.span
@@ -223,7 +223,7 @@ const Banner = () => {
             {/* Subtitle */}
             <p
               ref={subtitleRef}
-              className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl"
+              className="text-lg sm:text-xl text-gray-600 dark:text-gray-200 mb-8 max-w-2xl"
             >
               Join thousands of learners worldwide and unlock your potential
               with our expert-led courses. Start your journey to success today!
@@ -421,7 +421,7 @@ const Banner = () => {
       </motion.div>
 
       {/* Fancy Marquee Section */}
-      <div className="absolute bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm py-6 border-t border-gray-200">
+      <div className="absolute bottom-0 left-0 right-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm py-6 border-t border-gray-200 dark:border-gray-700">
         <Marquee gradient={false} speed={50} className="overflow-hidden">
           {[
             {
@@ -467,12 +467,12 @@ const Banner = () => {
           ].map((item, index) => (
             <motion.div
               key={index}
-              className="flex items-center space-x-3 mx-8 px-6 py-3 bg-white rounded-full shadow-md border border-gray-200"
+              className="flex items-center space-x-3 mx-8 px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md border border-gray-200 dark:border-gray-700"
               whileHover={{ scale: 1.1, y: -5 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <span className={item.color}>{item.icon}</span>
-              <span className="font-semibold text-gray-800 whitespace-nowrap">
+              <span className="font-semibold text-gray-800 dark:text-gray-200 whitespace-nowrap">
                 {item.text}
               </span>
             </motion.div>
