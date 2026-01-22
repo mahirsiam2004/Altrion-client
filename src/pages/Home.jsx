@@ -22,13 +22,12 @@ export const Home = () => {
     try {
       setLoading(true);
 
-      // Use the new getFeaturedCourses method
+      
       const featuredCourses = await coursesAPI.getFeaturedCourses();
       
-      // Ensure it's an array
       const coursesArray = Array.isArray(featuredCourses) ? featuredCourses : [];
       
-      // If no featured courses, get all courses (limited to 6)
+   
       if (coursesArray.length === 0) {
         const allCourses = await coursesAPI.getAllCourses();
         const allCoursesArray = Array.isArray(allCourses) ? allCourses : [];
@@ -48,10 +47,10 @@ export const Home = () => {
 
   return (
     <div>
-      {/* Banner Section */}
+    
       <Banner />
 
-      {/* Popular Courses Section */}
+   
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -122,7 +121,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
+
       <section className="py-20 bg-gradient-to-br from-indigo-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -195,7 +194,7 @@ export const Home = () => {
       <Showcase3D />
       <Review />
 
-      {/* Top Instructors Section */}
+     
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div

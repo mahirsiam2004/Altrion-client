@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, BookOpen, LogOut, User } from 'lucide-react';
-import { toast } from 'react-toastify';
-import { AuthContext } from '../context/AuthContext';
-import ThemeToggle from './ThemeToggle';
+import React, { useState, useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Menu, X, BookOpen, LogOut, User } from "lucide-react";
+import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
+import ThemeToggle from "./ThemeToggle";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,11 +12,11 @@ export const Navbar = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      toast.success('Logged out successfully!');
+      toast.success("Logged out successfully!");
       setIsOpen(false);
     } catch (error) {
-      console.error('Logout error:', error);
-      toast.error('Failed to logout');
+      console.error("Logout error:", error);
+      toast.error("Failed to logout");
     }
   };
 
@@ -24,15 +24,11 @@ export const Navbar = () => {
   const closeMenu = () => setIsOpen(false);
 
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/courses', label: 'Courses' },
+    { path: "/", label: "Home" },
+    { path: "/courses", label: "Courses" },
   ];
 
-  const authLinks = user
-    ? [
-        { path: '/dashboard', label: 'Dashboard' },
-      ]
-    : [];
+  const authLinks = user ? [{ path: "/dashboard", label: "Dashboard" }] : [];
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors duration-300">
@@ -57,8 +53,8 @@ export const Navbar = () => {
                 className={({ isActive }) =>
                   `font-medium transition-colors ${
                     isActive
-                      ? 'text-indigo-600 dark:text-indigo-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400'
+                      ? "text-indigo-600 dark:text-indigo-400"
+                      : "text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
                   }`
                 }
               >
@@ -71,7 +67,7 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             {/* Theme Toggle */}
             <ThemeToggle />
-            
+
             {user ? (
               <>
                 {/* User Profile Dropdown */}
@@ -81,11 +77,11 @@ export const Navbar = () => {
                 >
                   {user.photoURL ? (
                     <img
-                      src={user.photoURL}
+                      src={user?.photoURL}
                       alt={user?.displayName}
                       className="w-10 h-10 rounded-full border-2 border-indigo-500"
                       onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/40';
+                        e.target.src = "https://via.placeholder.com/40";
                       }}
                     />
                   ) : (
@@ -94,7 +90,7 @@ export const Navbar = () => {
                     </div>
                   )}
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {user?.displayName || 'User'}
+                    {user?.displayName || "User"}
                   </span>
                 </Link>
                 <button
@@ -146,8 +142,8 @@ export const Navbar = () => {
                 className={({ isActive }) =>
                   `block px-4 py-2 rounded-md ${
                     isActive
-                      ? 'bg-indigo-50 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+                      ? "bg-indigo-50 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400"
+                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
                   }`
                 }
               >
@@ -178,7 +174,7 @@ export const Navbar = () => {
                       alt={user.displayName}
                       className="w-10 h-10 rounded-full border-2 border-indigo-500"
                       onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/40';
+                        e.target.src = "https://via.placeholder.com/40";
                       }}
                     />
                   ) : (
@@ -188,9 +184,11 @@ export const Navbar = () => {
                   )}
                   <div>
                     <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
-                      {user.displayName || 'User'}
+                      {user.displayName || "User"}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {user.email}
+                    </p>
                   </div>
                 </Link>
                 <button
