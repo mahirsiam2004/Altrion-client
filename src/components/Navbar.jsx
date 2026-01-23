@@ -4,6 +4,7 @@ import { Menu, X, BookOpen, LogOut, User } from "lucide-react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 import ThemeToggle from "./ThemeToggle";
+import Logo from "./Logo";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,8 +41,9 @@ export const Navbar = () => {
             className="flex items-center space-x-2 text-2xl font-bold text-indigo-600 dark:text-indigo-400"
             onClick={closeMenu}
           >
-            <BookOpen className="w-8 h-8" />
-            <span>Altrion</span>
+            {/* <BookOpen className="w-8 h-8" />
+            <span>Altrion</span> */}
+            <Logo></Logo>
           </Link>
 
           {/* Desktop Navigation */}

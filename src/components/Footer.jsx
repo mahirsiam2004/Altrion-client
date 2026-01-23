@@ -11,6 +11,7 @@ import {
   Linkedin,
   Youtube,
 } from "lucide-react";
+import Logo from "./Logo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -23,8 +24,9 @@ const Footer = () => {
           {/* About Section */}
           <div>
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <BookOpen className="w-8 h-8 text-indigo-500" />
-              <span className="text-2xl font-bold text-white">Altrion</span>
+              {/* <BookOpen className="w-8 h-8 text-indigo-500" />
+              <span className="text-2xl font-bold text-white">Altrion</span> */}
+              <Logo></Logo>
             </Link>
             <p className="text-sm text-gray-400 mb-4">
               Empowering learners worldwide with quality education and
