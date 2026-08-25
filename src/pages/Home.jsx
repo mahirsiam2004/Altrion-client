@@ -9,6 +9,7 @@ import CourseCard from "../components/CourseCard";
 import CourseCardSkeleton from "../components/CourseCardSkeleton";
 import Showcase3D from "../components/Showcase3D";
 import Review from "./Review";
+import Banner from "../components/Banner";
 import { coursesAPI } from "../services/api";
 
 const Home = () => {
@@ -54,8 +55,11 @@ const Home = () => {
   ];
 
   return (
-    <div className="bg-[var(--cream)]">
-      {/* Categories - simplified */}
+      <div className="bg-[var(--cream)]">
+        {/* Hero Banner */}
+        <Banner />
+      
+        {/* Categories - simplified */}
       <section className="py-16 lg:py-24">
         <div className="container-sand">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-10">
