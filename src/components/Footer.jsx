@@ -117,13 +117,20 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom Bar — logo replaces Altrion wordmark */}
       <div className="border-t border-[var(--line)] dark:border-[var(--line)]">
         <div className="container-sand py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-[var(--text-faint)] dark:text-[var(--text-faint)]">
-              © {currentYear} Altrion. সর্বস্বত্ব সংরক্ষিত।
-            </p>
+            <Link to="/" className="flex items-center space-x-2.5">
+              <img
+                src="/logo.png"
+                alt="Altrion Logo"
+                className="w-8 h-8 object-contain"
+              />
+              <span className="text-sm text-[var(--text-faint)] dark:text-[var(--text-faint)]">
+                © {currentYear} Altrion. সর্বস্বত্ব সংরক্ষিত।
+              </span>
+            </Link>
             <div className="flex space-x-6">
               <Link to="/privacy" className="text-sm text-[var(--text-faint)] dark:text-[var(--text-faint)] hover:text-[var(--sage)] dark:hover:text-[var(--amber)] transition-colors">গোপনীয়তা</Link>
               <Link to="/terms" className="text-sm text-[var(--text-faint)] dark:text-[var(--text-faint)] hover:text-[var(--sage)] dark:hover:text-[var(--amber)] transition-colors">শর্তাবলী</Link>

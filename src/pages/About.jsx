@@ -6,15 +6,15 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <div className="min-h-screen bg-[var(--surface)] dark:bg-[var(--surface-soft)]">
-      {/* Hero — fixed: sage gradient so white text is visible */}
+      {/* Hero — darker sage gradient so white text has strong contrast */}
       <section
         className="text-white py-24"
-        style={{ backgroundImage: "linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%)" }}
+        style={{ backgroundImage: "linear-gradient(135deg, #5b6e57 0%, #3d4d3a 100%)" }}
       >
         <div className="container-sand">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
             <h1 className="text-5xl font-bold mb-6">Altrion সম্পর্কে</h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-xl text-white/95 max-w-3xl mx-auto">
               গুণমানসম্পন্ন শিক্ষা আর উদ্ভাবনী কোর্সের মাধ্যমে শিক্ষার্থীদের ক্ষমতায়নে আমরা প্রতিশ্রুতিবদ্ধ
             </p>
           </motion.div>
