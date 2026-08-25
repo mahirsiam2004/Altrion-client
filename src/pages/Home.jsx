@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight, BookOpen, Users, Star, Trophy, Code2, Palette, BarChart3,
-  Smartphone, Database, PenTool, Sparkles, Quote,
+  Smartphone, Database, PenTool, Sparkles, Quote, PlayCircle, Clock,
+  Signal, GraduationCap, UserPlus, Target, CheckCircle2,
 } from "lucide-react";
 import CourseCard from "../components/CourseCard";
 import CourseCardSkeleton from "../components/CourseCardSkeleton";
-import Showcase3D from "../components/Showcase3D";
 import Review from "./Review";
 import Banner from "../components/Banner";
 import { coursesAPI } from "../services/api";
@@ -50,20 +50,26 @@ const Home = () => {
 
   const testimonials = [
     { name: "তানভীর আহমেদ", role: "ওয়েব ডেভেলপার", text: "Altrion-এর কোর্সগুলো আমাকে ফ্রিল্যান্সিং শুরু করতে সাহায্য করেছে।" },
-    { name: "সাবরিনা খান", role: "UI ডিজাইনার", text: "প্র্যাকটিক্যাল প্রজেক্টগুলো শেখakei অনেক মজার করে তুলেছে।" },
-    { name: "রাকিব হাসান", role: "ডেটা অ্যানালিস্ট", text: "সহজ ভাষায় জটিল বিষয় বোঝানোর জন্য Altrion সerea." },
+    { name: "সাবরিনা খান", role: "UI ডিজাইনার", text: "প্র্যাকটিক্যাল প্রজেক্টগুলো শেখাকে অনেক মজার করে তুলেছে।" },
+    { name: "রাকিব হাসান", role: "ডেটা অ্যানালিস্ট", text: "সহজ ভাষায় জটিল বিষয় বোঝানোর জন্য Altrion সেরা।" },
   ];
 
   const upcomingLiveCourses = [
-    { title: "ফুল স্ট্যাক জেভাল programme", instructor: "আমিন হোসেন", time: "৫ দিন বাঁশলী", level: "উভয়", badge: "Live", price: "মাত্র ৳2,999" },
-    { title: "ইউআই/ইউএক্স ডিজাইন podstawy", instructor: "রাবি আক্তা", time: "৭ দিন বাঁশলী", level: "মূলভূত", badge: "Live", price: "মাত্র ৳1,999" },
-    { title: "ডেটা সায়েন্স এর প্রাথমিক", instructor: "সimab কুমার", time: "৩ দিন বাঁশলী", level: "মূলভূত", badge: "Live", price: "মাত্র ৳1,499" },
+    { title: "ফুল স্ট্যাক ওয়েব ডেভেলপমেন্ট", instructor: "আমিন হোসেন", duration: "৫ দিন ধরে", level: "সবার জন্য", icon: <Code2 className="w-6 h-6" />, price: "৳২,৯৯৯" },
+    { title: "ইউআই/ইউএক্স ডিজাইন বেসিক", instructor: "রাবি আক্তা", duration: "৭ দিন ধরে", level: "মৌলিক", icon: <Palette className="w-6 h-6" />, price: "৳১,৯৯৯" },
+    { title: "ডেটা সায়েন্স ফান্ডামেন্টাল", instructor: "সিমাব কুমার", duration: "৩ দিন ধরে", level: "মৌলিক", icon: <Database className="w-6 h-6" />, price: "৳১,৪৯৯" },
   ];
 
   const freeDemoCourses = [
-    { title: "ওয়েব ডেভেলপমেন্টের বিস্তারিত", category: "ওয়েব", rating: "4.9", students: "৫০০+" },
-    { title: "মোবাইল অ্যাপ ডেভেলপমেন্ট", category: " অ্যাপ", rating: "4.8", students: "৩০০+" },
-    { title: "ইউআই/ইউএক্স বেসিক", category: "ডিজাইন", rating: "4.7", students: "২০০+" },
+    { title: "ওয়েব ডেভেলপমেন্টের বিস্তারিত", category: "ওয়েব", rating: "4.9", students: "৫০০+", icon: <Code2 className="w-6 h-6" /> },
+    { title: "মোবাইল অ্যাপ ডেভেলপমেন্ট", category: "অ্যাপ", rating: "4.8", students: "৩০০+", icon: <Smartphone className="w-6 h-6" /> },
+    { title: "ইউআই/ইউএক্স বেসিক", category: "ডিজাইন", rating: "4.7", students: "২০০+", icon: <Palette className="w-6 h-6" /> },
+  ];
+
+  const howItWorks = [
+    { step: "০১", icon: <UserPlus className="w-7 h-7" />, title: "অ্যাকাউন্ট খুলুন", desc: "মাত্র ২ মিনিটে ফ্রি অ্যাকাউন্ট তৈরি করুন এবং শেখা শুরু করুন।" },
+    { step: "০২", icon: <Target className="w-7 h-7" />, title: "কোর্স বেছে নিন", desc: "আপনার লক্ষ্য অনুযায়ী সেরা কোর্স বা লাইভ ক্লাস নির্বাচন করুন।" },
+    { step: "০৩", icon: <GraduationCap className="w-7 h-7" />, title: "সার্টিফিকেট পান", desc: "কোর্স শেষে মূল্যায়নে পাস করলে পান স্বীকৃত সার্টিফিকেট।" },
   ];
 
   return (
@@ -137,26 +143,90 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Showcase 3D - keep but minimal */}
-      <Showcase3D />
-
-      {/* Upcoming Live Courses */}
+      {/* How it works — replaces old 3D showcase */}
       <section className="py-16 lg:py-24" style={{ backgroundImage: "linear-gradient(135deg, var(--sage-light) 0%, var(--cream) 100%)" }}>
         <div className="container-sand">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <span className="sand-eyebrow mb-4">আমাদের upcoming</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-ink)] mb-4">আমরা খুঁজে পাই live course-গুলো</h2>
+            <span className="sand-eyebrow mb-4">কিভাবে কাজ করে</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-ink)] mb-4">তিন ধাপে শুরু করুন</h2>
+          </motion.div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {howItWorks.map((s, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.12 }}
+                className="relative sand-card p-7 text-center hover:shadow-xl transition-shadow"
+              >
+                <div className="absolute top-4 right-5 text-5xl font-black text-[var(--sage-light)] opacity-60 select-none">{s.step}</div>
+                <div className="w-16 h-16 mx-auto rounded-2xl bg-[var(--sage)] flex items-center justify-center text-white mb-5 shadow-lg">{s.icon}</div>
+                <h3 className="font-bold text-[var(--text-ink)] text-lg mb-2">{s.title}</h3>
+                <p className="text-sm text-[var(--text-soft)] leading-relaxed">{s.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Upcoming Live Courses — class-booking cards */}
+      <section className="py-16 lg:py-24">
+        <div className="container-sand">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <span className="sand-eyebrow mb-4">আসন্ন লাইভ</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-ink)] mb-4">আমাদের আসন্ন লাইভ কোর্স</h2>
+            <p className="text-[var(--text-soft)] max-w-xl mx-auto">সরাসরি প্রশিক্ষকের সাথে শিখুন — আসন সীমিত, আগে আসলে আগে পাবেন।</p>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {upcomingLiveCourses.map((c, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="sand-card p-5 hover:shadow-xl transition-shadow text-center">
-                <span className="absolute top-2 right-2 bg-[var(--amber)] text-[var(--cream)] text-xs rounded-full px-2 font-semibold">{c.badge}</span>
-                <h3 className="text-xl font-bold text-[var(--text-ink)] mt-4">{c.title}</h3>
-                <p className="text-[var(--text-soft)] mb-2"><span className="font-medium">শিক্ষক:</span> {c.instructor}</p>
-                <p className="text-[var(--text-soft)] mb-4"><span className="font-medium">ระยะเว:</span> {c.time}</p>
-                <div className="flex items-center justify-center space-x-2">
-                  <span className="text-[var(--sage)] font-bold">{c.level}</span>
-                  <span className="text-xs text-[var(--text-faint)]">{c.price}</span>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="group relative bg-white dark:bg-[var(--surface-dark-card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm hover:shadow-2xl transition-all duration-300"
+              >
+                {/* thumbnail */}
+                <div
+                  className="relative h-32 flex items-center justify-center"
+                  style={{ backgroundImage: "linear-gradient(135deg, var(--sage) 0%, var(--sage-dark, #6f8470) 100%)" }}
+                >
+                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
+                  <div className="w-14 h-14 rounded-2xl bg-white/90 flex items-center justify-center text-[var(--sage)] shadow-lg">{c.icon}</div>
+                  <span className="absolute top-3 left-3 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--amber)] text-[var(--cream)] text-xs font-semibold">
+                    <Signal className="w-3.5 h-3.5" /> লাইভ
+                  </span>
+                </div>
+
+                {/* body */}
+                <div className="p-5">
+                  <h3 className="font-bold text-[var(--text-ink)] text-lg leading-snug mb-3">{c.title}</h3>
+
+                  <div className="flex items-center gap-2 mb-3">
+                    <img src={`https://i.pravatar.cc/80?img=${10 + i}`} alt="" className="w-8 h-8 rounded-full object-cover" />
+                    <div className="text-sm">
+                      <span className="text-[var(--text-faint)] text-xs">শিক্ষক </span>
+                      <span className="font-semibold text-[var(--text-ink)]">{c.instructor}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-md bg-[var(--sage-light)] text-[var(--sage)] font-medium">
+                      <Clock className="w-3.5 h-3.5" /> {c.duration}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-md bg-[var(--cream)] dark:bg-[var(--surface-dark-soft)] text-[var(--text-soft)] font-medium border border-[var(--line)]">
+                      {c.level}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-[var(--line)]">
+                    <span className="text-xl font-extrabold text-[var(--text-ink)]">{c.price}</span>
+                    <Link to="/signup" className="sand-btn text-sm px-4 py-2 inline-flex items-center gap-1">
+                      এনরোল করুন <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -164,21 +234,44 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Free Demo Courses */}
+      {/* Free Demo Courses — polished cards */}
       <section className="py-16 lg:py-24 bg-[var(--surface)]">
         <div className="container-sand">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <span className="sand-eyebrow mb-4">মুক্ত демо</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-ink)] mb-4">ফ্রি demo কোর্সগুলো নিন</h2>
+            <span className="sand-eyebrow mb-4">মুক্ত ডেমো</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-ink)] mb-4">ফ্রি ডেমো কোর্সগুলো নিন</h2>
+            <p className="text-[var(--text-soft)] max-w-xl mx-auto">যেকোনো কোর্স শুরু করার আগে বিনামূল্যে ঝলক দেখে নিন।</p>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-6">
             {freeDemoCourses.map((c, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="sand-card p-5 text-center group">
-                <div className="w-14 h-14 mx-auto rounded-xl bg-[var(--sage-light)] flex items-center justify-center mb-5">{c.title.charAt(0)}</div>
-                <h3 className="font-semibold text-[var(--text-ink)] mb-2">{c.title}</h3>
-                <p className="text-[var(--text-soft)] mb-4"><span className="text-[var(--sage)]">মূল্যায়ন:</span> {c.rating} ⭐</p>
-                <p className="text-[var(--text-soft)] mb-2"><span className="text-[var(--sage)]"> enrolled:</span> {c.students}</p>
-                <Link to="/courses" className="sand-btn text-[var(--amber)] text-sm hover:text-[var(--sage)] transition-colors">এক teased নিন</Link>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="group bg-white dark:bg-[var(--surface-dark-card)] rounded-2xl p-6 border border-[var(--line)] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-[var(--sage-light)] text-[var(--sage)]">{c.category}</span>
+                  <div className="flex items-center gap-1 text-[var(--amber)]">
+                    <Star className="w-4 h-4 fill-current" />
+                    <span className="text-sm font-bold text-[var(--text-ink)]">{c.rating}</span>
+                  </div>
+                </div>
+
+                <div className="w-12 h-12 rounded-xl bg-[var(--sage-light)] flex items-center justify-center text-[var(--sage)] mb-4 group-hover:bg-[var(--sage)] group-hover:text-white transition-colors">{c.icon}</div>
+
+                <h3 className="font-semibold text-[var(--text-ink)] text-base leading-snug mb-3 min-h-[48px]">{c.title}</h3>
+
+                <div className="flex items-center gap-1.5 text-sm text-[var(--text-soft)] mb-5">
+                  <Users className="w-4 h-4 text-[var(--sage)]" />
+                  <span>{c.students} শিক্ষার্থী</span>
+                </div>
+
+                <Link to="/courses" className="sand-btn-ghost w-full justify-center text-sm py-2.5 inline-flex items-center gap-1">
+                  <PlayCircle className="w-4 h-4" /> ফ্রি শুরু করুন
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -190,29 +283,25 @@ const Home = () => {
         <div className="container-sand">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <span className="sand-eyebrow mb-4">ক্যারিয়ার পথ</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-ink)] mb-4">আপনার স্কিলs থেকে ক্যারিয়ার নির্বাচন করুন</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-ink)] mb-4">আপনার দক্ষতা থেকে ক্যারিয়ার গড়ুন</h2>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="sand-card p-4 text-center group-hover:bg-[var(--sage-light)] group-hover:text-[var(--sage)] transition-colors rounded-xl cursor-pointer" onClick={() => alert('Web Development path')}>
-              <div className="w-12 h-12 mx-auto rounded-xl bg-[var(--sage)] flex items-center justify-center mb-3"><BookOpen className="w-6 h-6 text-white" /></div>
-              <h3 className="font-semibold text-[var(--text-ink)]">ওয়েব ডেভেলপমেন্ট</h3>
-              <p className="text-[var(--text-soft)]">১২০+ কোর্স, ৫০+ proyectos</p>
-            </div>
-            <div className="sand-card p-4 text-center group-hover:bg-[var(--sage-light)] group-hover:text-[var(--sage)] transition-colors rounded-xl cursor-pointer" onClick={() => alert('UI/UX path')}>
-              <div className="w-12 h-12 mx-auto rounded-xl bg-[var(--sage)] flex items-center justify-center mb-3"><Palette className="w-6 h-6 text-white" /></div>
-              <h3 className="font-semibold text-[var(--text-ink)]">ইউআই/ইউএক্স</h3>
-              <p className="text-[var(--text-soft)]">৬০+ কোর্স, Portfolio বনাম</p>
-            </div>
-            <div className="sand-card p-4 text-center group-hover:bg-[var(--sage-light)] group-hover:text-[var(--sage)] transition-colors rounded-xl cursor-pointer" onClick={() => alert('Data path')}>
-              <div className="w-12 h-12 mx-auto rounded-xl bg-[var(--sage)] flex items-center justify-center mb-3"><Database className="w-6 h-6 text-white" /></div>
-              <h3 className="font-semibold text-[var(--text-ink)]">ডেটা সায়েন্স</h3>
-              <p className="text-[var(--text-soft)]">৯০+ কোর্স, Industrivis analitik</p>
-            </div>
-            <div className="sand-card p-4 text-center group-hover:bg-[var(--sage-light)] group-hover:text-[var(--sage)] transition-colors rounded-xl cursor-pointer" onClick={() => alert('Marketing path')}>
-              <div className="w-12 h-12 mx-auto rounded-xl bg-[var(--sage)] flex items-center justify-center mb-3"><BarChart3 className="w-6 h-6 text-white" /></div>
-              <h3 className="font-semibold text-[var(--text-ink)]">ডিজিটাল মার্কেটিং</h3>
-              <p className="text-[var(--text-soft)]">৭০+ কোর্স, Campaigns expertise</p>
-            </div>
+            {[
+              { icon: <BookOpen className="w-6 h-6" />, name: "ওয়েব ডেভেলপমেন্ট", desc: "১২০+ কোর্স, ৫০+ প্রজেক্ট" },
+              { icon: <Palette className="w-6 h-6" />, name: "ইউআই/ইউএক্স", desc: "৬০+ কোর্স, পোর্টফোলিও" },
+              { icon: <Database className="w-6 h-6" />, name: "ডেটা সায়েন্স", desc: "৯০+ কোর্স, বাস্তব বিশ্লেষণ" },
+              { icon: <BarChart3 className="w-6 h-6" />, name: "ডিজিটাল মার্কেটিং", desc: "৭০+ কোর্স, ক্যাম্পেইন" },
+            ].map((p, i) => (
+              <div
+                key={i}
+                className="sand-card p-5 text-center cursor-pointer hover:-translate-y-1 hover:shadow-lg transition-all"
+                onClick={() => alert(p.name + ' পাথ')}
+              >
+                <div className="w-12 h-12 mx-auto rounded-xl bg-[var(--sage)] flex items-center justify-center mb-3 text-white">{p.icon}</div>
+                <h3 className="font-semibold text-[var(--text-ink)]">{p.name}</h3>
+                <p className="text-xs text-[var(--text-soft)] mt-1">{p.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
