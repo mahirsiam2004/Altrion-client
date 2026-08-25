@@ -1,9 +1,7 @@
 import { useState } from "react";
 
-
 function App() {
-
-  return <>testing from client</>;
+  return null;
 }
 
 export default App;
