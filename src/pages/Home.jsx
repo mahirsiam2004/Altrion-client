@@ -50,16 +50,28 @@ const Home = () => {
 
   const testimonials = [
     { name: "তানভীর আহমেদ", role: "ওয়েব ডেভেলপার", text: "Altrion-এর কোর্সগুলো আমাকে ফ্রিল্যান্সিং শুরু করতে সাহায্য করেছে।" },
-    { name: "সাবরিনা খান", role: "UI ডিজাইনার", text: "প্র্যাকটিক্যাল প্রজেক্টগুলো শেখাকে অনেক মজার করে তুলেছে।" },
-    { name: "রাকিব হাসান", role: "ডেটা অ্যানালিস্ট", text: "সহজ ভাষায় জটিল বিষয় বোঝানোর জন্য Altrion সেরা।" },
+    { name: "সাবরিনা খান", role: "UI ডিজাইনার", text: "প্র্যাকটিক্যাল প্রজেক্টগুলো শেখakei অনেক মজার করে তুলেছে।" },
+    { name: "রাকিব হাসান", role: "ডেটা অ্যানালিস্ট", text: "সহজ ভাষায় জটিল বিষয় বোঝানোর জন্য Altrion সerea." },
+  ];
+
+  const upcomingLiveCourses = [
+    { title: "ফুল স্ট্যাক জেভাল programme", instructor: "আমিন হোসেন", time: "৫ দিন বাঁশলী", level: "উভয়", badge: "Live", price: "মাত্র ৳2,999" },
+    { title: "ইউআই/ইউএক্স ডিজাইন podstawy", instructor: "রাবি আক্তা", time: "৭ দিন বাঁশলী", level: "মূলভূত", badge: "Live", price: "মাত্র ৳1,999" },
+    { title: "ডেটা সায়েন্স এর প্রাথমিক", instructor: "সimab কুমার", time: "৩ দিন বাঁশলী", level: "মূলভূত", badge: "Live", price: "মাত্র ৳1,499" },
+  ];
+
+  const freeDemoCourses = [
+    { title: "ওয়েব ডেভেলপমেন্টের বিস্তারিত", category: "ওয়েব", rating: "4.9", students: "৫০০+" },
+    { title: "মোবাইল অ্যাপ ডেভেলপমেন্ট", category: " অ্যাপ", rating: "4.8", students: "৩০০+" },
+    { title: "ইউআই/ইউএক্স বেসিক", category: "ডিজাইন", rating: "4.7", students: "২০০+" },
   ];
 
   return (
-      <div className="bg-[var(--cream)]">
-        {/* Hero Banner */}
-        <Banner />
-      
-        {/* Categories - simplified */}
+    <div className="bg-[var(--cream)]">
+      {/* Hero Banner */}
+      <Banner />
+
+      {/* Categories - simplified */}
       <section className="py-16 lg:py-24">
         <div className="container-sand">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-10">
@@ -127,6 +139,83 @@ const Home = () => {
 
       {/* Showcase 3D - keep but minimal */}
       <Showcase3D />
+
+      {/* Upcoming Live Courses */}
+      <section className="py-16 lg:py-24" style={{ backgroundImage: "linear-gradient(135deg, var(--sage-light) 0%, var(--cream) 100%)" }}>
+        <div className="container-sand">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <span className="sand-eyebrow mb-4">আমাদের upcoming</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-ink)] mb-4">আমরা খুঁজে পাই live course-গুলো</h2>
+          </motion.div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {upcomingLiveCourses.map((c, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="sand-card p-5 hover:shadow-xl transition-shadow text-center">
+                <span className="absolute top-2 right-2 bg-[var(--amber)] text-[var(--cream)] text-xs rounded-full px-2 font-semibold">{c.badge}</span>
+                <h3 className="text-xl font-bold text-[var(--text-ink)] mt-4">{c.title}</h3>
+                <p className="text-[var(--text-soft)] mb-2"><span className="font-medium">শিক্ষক:</span> {c.instructor}</p>
+                <p className="text-[var(--text-soft)] mb-4"><span className="font-medium">ระยะเว:</span> {c.time}</p>
+                <div className="flex items-center justify-center space-x-2">
+                  <span className="text-[var(--sage)] font-bold">{c.level}</span>
+                  <span className="text-xs text-[var(--text-faint)]">{c.price}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Free Demo Courses */}
+      <section className="py-16 lg:py-24 bg-[var(--surface)]">
+        <div className="container-sand">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <span className="sand-eyebrow mb-4">মুক্ত демо</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-ink)] mb-4">ফ্রি demo কোর্সগুলো নিন</h2>
+          </motion.div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {freeDemoCourses.map((c, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="sand-card p-5 text-center group">
+                <div className="w-14 h-14 mx-auto rounded-xl bg-[var(--sage-light)] flex items-center justify-center mb-5">{c.title.charAt(0)}</div>
+                <h3 className="font-semibold text-[var(--text-ink)] mb-2">{c.title}</h3>
+                <p className="text-[var(--text-soft)] mb-4"><span className="text-[var(--sage)]">মূল্যায়ন:</span> {c.rating} ⭐</p>
+                <p className="text-[var(--text-soft)] mb-2"><span className="text-[var(--sage)]"> enrolled:</span> {c.students}</p>
+                <Link to="/courses" className="sand-btn text-[var(--amber)] text-sm hover:text-[var(--sage)] transition-colors">এক teased নিন</Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Learning Paths & Career Tracks */}
+      <section className="py-16 lg:py-24" style={{ backgroundImage: "linear-gradient(180deg, var(--cream) 0%, var(--sage-light) 100%)" }}>
+        <div className="container-sand">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <span className="sand-eyebrow mb-4">ক্যারিয়ার পথ</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-ink)] mb-4">আপনার স্কিলs থেকে ক্যারিয়ার নির্বাচন করুন</h2>
+          </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="sand-card p-4 text-center group-hover:bg-[var(--sage-light)] group-hover:text-[var(--sage)] transition-colors rounded-xl cursor-pointer" onClick={() => alert('Web Development path')}>
+              <div className="w-12 h-12 mx-auto rounded-xl bg-[var(--sage)] flex items-center justify-center mb-3"><BookOpen className="w-6 h-6 text-white" /></div>
+              <h3 className="font-semibold text-[var(--text-ink)]">ওয়েব ডেভেলপমেন্ট</h3>
+              <p className="text-[var(--text-soft)]">১২০+ কোর্স, ৫০+ proyectos</p>
+            </div>
+            <div className="sand-card p-4 text-center group-hover:bg-[var(--sage-light)] group-hover:text-[var(--sage)] transition-colors rounded-xl cursor-pointer" onClick={() => alert('UI/UX path')}>
+              <div className="w-12 h-12 mx-auto rounded-xl bg-[var(--sage)] flex items-center justify-center mb-3"><Palette className="w-6 h-6 text-white" /></div>
+              <h3 className="font-semibold text-[var(--text-ink)]">ইউআই/ইউএক্স</h3>
+              <p className="text-[var(--text-soft)]">৬০+ কোর্স, Portfolio বনাম</p>
+            </div>
+            <div className="sand-card p-4 text-center group-hover:bg-[var(--sage-light)] group-hover:text-[var(--sage)] transition-colors rounded-xl cursor-pointer" onClick={() => alert('Data path')}>
+              <div className="w-12 h-12 mx-auto rounded-xl bg-[var(--sage)] flex items-center justify-center mb-3"><Database className="w-6 h-6 text-white" /></div>
+              <h3 className="font-semibold text-[var(--text-ink)]">ডেটা সায়েন্স</h3>
+              <p className="text-[var(--text-soft)]">৯০+ কোর্স, Industrivis analitik</p>
+            </div>
+            <div className="sand-card p-4 text-center group-hover:bg-[var(--sage-light)] group-hover:text-[var(--sage)] transition-colors rounded-xl cursor-pointer" onClick={() => alert('Marketing path')}>
+              <div className="w-12 h-12 mx-auto rounded-xl bg-[var(--sage)] flex items-center justify-center mb-3"><BarChart3 className="w-6 h-6 text-white" /></div>
+              <h3 className="font-semibold text-[var(--text-ink)]">ডিজিটাল মার্কেটিং</h3>
+              <p className="text-[var(--text-soft)]">৭০+ কোর্স, Campaigns expertise</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Testimonials - simplified */}
       <section className="py-16 lg:py-24 bg-[var(--surface)]">
