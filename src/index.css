@@ -4,8 +4,11 @@
 }
 
 /* ============================================================
-   Altrion Design System — "Soft Sand"
-   Creamy tans, soft blush, gentle browns.
+   Altrion Design System — Custom Palette
+   #8FA28A (sage) — primary
+   #C7D3C0 (sage-light) — secondary bg
+   #F7F4ED (cream) — surface
+   #C8A96B (amber) — accent/CTA
    Font: Hind Siliguri (Bangla + Latin)
    ============================================================ */
 
@@ -79,64 +82,59 @@
 }
 
 :root {
-  /* Soft Sand palette */
-  --sand-parchment: #edede9;
-  --sand-bone: #d6ccc2;
-  --sand-linen: #f5ebe0;
-  --sand-almond-cream: #e3d5ca;
-  --sand-almond-silk: #d5bdaf;
+  /* Custom palette */
+  --sage: #8FA28A;
+  --sage-light: #C7D3C0;
+  --cream: #F7F4ED;
+  --amber: #C8A96B;
+  --amber-hover: #b89860;
+  --sage-dark: #7a8d75;
 
-  --sand-deep: #9c8a7d;
-  --sand-accent: #b08968;
-  --sand-accent-strong: #8a6f5a;
-  --sand-ink: #4a4238;
+  /* Surfaces (light) */
+  --surface: #F7F4ED;
+  --surface-soft: #F7F4ED;
+  --surface-card: #FFFFFF;
+  --surface-elevated: #FFFFFF;
 
-  /* Surfaces */
-  --surface: #faf7f2;
-  --surface-soft: #f3ece3;
-  --surface-card: #fffdfa;
-  --surface-dark: #2b2620;
-  --surface-dark-soft: #3a332b;
-  --surface-dark-card: #423a31;
+  /* Text (light) */
+  --text-ink: #1a1a1a;
+  --text-soft: #5a5a5a;
+  --text-faint: #9a9a9a;
+  --text-on-primary: #FFFFFF;
 
-  /* Text */
-  --text-ink: #4a4238;
-  --text-soft: #7a6f63;
-  --text-faint: #a89c8e;
-  --text-dark-ink: #f3ece3;
-  --text-dark-soft: #cabfb1;
-  --text-dark-faint: #9c8a7d;
-
-  /* Borders */
-  --line: #e7ded3;
-  --line-strong: #d8cab9;
-  --line-dark: #4a4238;
-  --line-dark-strong: #5a5044;
+  /* Borders (light) */
+  --line: #e0e0e0;
+  --line-strong: #d0d0d0;
 
   /* Radius — soft, generous */
-  --radius-sm: 0.625rem;
-  --radius-md: 1rem;
-  --radius-lg: 1.5rem;
-  --radius-xl: 2rem;
-  --radius-2xl: 2.5rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
   --radius-full: 9999px;
 
   /* Soft shadows */
-  --shadow-xs: 0 1px 2px rgba(74, 66, 56, 0.04);
-  --shadow-sm: 0 2px 8px rgba(74, 66, 56, 0.06);
-  --shadow-md: 0 8px 24px rgba(74, 66, 56, 0.08);
-  --shadow-lg: 0 18px 40px rgba(74, 66, 56, 0.1);
-  --shadow-xl: 0 28px 60px rgba(74, 66, 56, 0.14);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 28px 60px rgba(0, 0, 0, 0.14);
+}
 
-  /* Spacing scale */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-7: 3rem;
-  --space-8: 4rem;
+/* Dark mode overrides */
+.dark {
+  --surface: #1a1a1a;
+  --surface-soft: #222222;
+  --surface-card: #2a2a2a;
+  --surface-elevated: #333333;
+
+  --text-ink: #FAFAFA;
+  --text-soft: #B0B0B0;
+  --text-faint: #707070;
+
+  --line: #3a3a3a;
+  --line-strong: #4a4a4a;
 }
 
 * {
@@ -162,11 +160,6 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-.dark body {
-  background-color: var(--surface-dark);
-  color: var(--text-dark-ink);
-}
-
 /* ---------- Reusable soft surface classes ---------- */
 .sand-bg {
   background-color: var(--surface);
@@ -185,12 +178,8 @@ body {
   box-shadow: var(--shadow-md);
   border-color: var(--line-strong);
 }
-.dark .sand-card {
-  background-color: var(--surface-dark-card);
-  border-color: var(--line-dark);
-}
 .dark .sand-card:hover {
-  border-color: var(--line-dark-strong);
+  border-color: var(--line-strong);
   box-shadow: var(--shadow-lg);
 }
 
@@ -204,21 +193,18 @@ body {
   border-radius: var(--radius-full);
   font-weight: 600;
   font-family: "Hind Siliguri", sans-serif;
-  background: linear-gradient(
-    135deg,
-    var(--sand-almond-silk),
-    var(--sand-accent)
-  );
-  color: #fff;
+  background: var(--sage);
+  color: var(--text-on-primary);
   border: none;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease, background 0.25s ease;
 }
 .sand-btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
   filter: brightness(1.04);
+  background: var(--sage-dark);
 }
 .sand-btn:active {
   transform: translateY(0);
@@ -235,20 +221,26 @@ body {
   font-weight: 600;
   font-family: "Hind Siliguri", sans-serif;
   background: var(--surface-card);
-  color: var(--text-ink);
-  border: 1.5px solid var(--line-strong);
+  color: var(--sage);
+  border: 1.5px solid var(--sage-light);
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
 .sand-btn-ghost:hover {
   transform: translateY(-2px);
-  border-color: var(--sand-accent);
+  border-color: var(--sage);
+  background: var(--sage-light);
   box-shadow: var(--shadow-sm);
 }
 .dark .sand-btn-ghost {
-  background: var(--surface-dark-card);
-  color: var(--text-dark-ink);
-  border-color: var(--line-dark-strong);
+  background: var(--surface-card);
+  color: var(--amber);
+  border-color: var(--amber);
+}
+.dark .sand-btn-ghost:hover {
+  border-color: var(--amber-hover);
+  background: var(--amber);
+  color: var(--text-on-primary);
 }
 
 /* Soft form field */
@@ -265,11 +257,11 @@ body {
 }
 .sand-input:focus {
   outline: none;
-  border-color: var(--sand-accent);
-  box-shadow: 0 0 0 4px rgba(176, 137, 104, 0.15);
+  border-color: var(--sage);
+  box-shadow: 0 0 0 4px rgba(143, 162, 138, 0.15);
 }
 .dark .sand-input {
-  background: var(--surface-dark-card);
+  background: var(--surface-card);
   border-color: var(--line-dark-strong);
   color: var(--text-dark-ink);
 }
@@ -300,7 +292,7 @@ body {
 
 /* Accessibility focus */
 *:focus-visible {
-  outline: 2px solid var(--sand-accent);
+  outline: 2px solid var(--sage);
   outline-offset: 2px;
 }
 
@@ -332,15 +324,15 @@ body {
   gap: 0.4rem;
   padding: 0.35rem 1rem;
   border-radius: var(--radius-full);
-  background: var(--sand-linen);
-  color: var(--sand-accent-strong);
+  background: var(--sage-light);
+  color: var(--sage);
   font-weight: 600;
   font-size: 0.85rem;
   letter-spacing: 0.02em;
 }
 .dark .sand-eyebrow {
-  background: var(--surface-dark-soft);
-  color: var(--sand-almond-silk);
+  background: var(--sage);
+  color: var(--cream);
 }
 
 /* Line clamp */
@@ -355,4 +347,20 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, .transition-all {
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
