@@ -8,13 +8,14 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-      aria-label="Toggle theme"
+      className="p-2 rounded-full bg-sand-linen dark:bg-surface-dark-soft hover:scale-105 transition-transform"
+      aria-label="থিম পরিবর্তন করুন"
+      title={theme === 'light' ? 'ডার্ক মোড' : 'লাইট মোড'}
     >
       {theme === 'light' ? (
-        <Moon className="w-5 h-5 text-gray-100 dark:text-gray-300" />
+        <Moon className="w-5 h-5 text-sand-accent-strong" />
       ) : (
-        <Sun className="w-5 h-5 text-yellow-400" />
+        <Sun className="w-5 h-5 text-sand-almond-silk" />
       )}
     </button>
   );

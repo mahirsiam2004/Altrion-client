@@ -1,5 +1,358 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark , cupcake;
+  themes: light --default, dark;
 }
 
+/* ============================================================
+   Altrion Design System — "Soft Sand"
+   Creamy tans, soft blush, gentle browns.
+   Font: Hind Siliguri (Bangla + Latin)
+   ============================================================ */
+
+/* Hind Siliguri font face (self-hosted webfont fallback) */
+@font-face {
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/hindsiliguri/v14/ijwOs5juQtsyLLR5jN4cxBEoRDf44uE.ttf)
+    format("truetype");
+}
+@font-face {
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf)
+    format("truetype");
+}
+@font-face {
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/hindsiliguri/v14/ijwOs5juQtsyLLR5jN4cxBEoRG_54uE.ttf)
+    format("truetype");
+}
+@font-face {
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/hindsiliguri/v14/ijwOs5juQtsyLLR5jN4cxBEoREP-4uE.ttf)
+    format("truetype");
+}
+@font-face {
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/hindsiliguri/v14/ijwOs5juQtsyLLR5jN4cxBEoRCf_4uE.ttf)
+    format("truetype");
+}
+
+/* Hind Siliguri utility classes */
+.hind-siliguri-light {
+  font-family: "Hind Siliguri", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.hind-siliguri-regular {
+  font-family: "Hind Siliguri", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.hind-siliguri-medium {
+  font-family: "Hind Siliguri", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.hind-siliguri-semibold {
+  font-family: "Hind Siliguri", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.hind-siliguri-bold {
+  font-family: "Hind Siliguri", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  /* Soft Sand palette */
+  --sand-parchment: #edede9;
+  --sand-bone: #d6ccc2;
+  --sand-linen: #f5ebe0;
+  --sand-almond-cream: #e3d5ca;
+  --sand-almond-silk: #d5bdaf;
+
+  --sand-deep: #9c8a7d;
+  --sand-accent: #b08968;
+  --sand-accent-strong: #8a6f5a;
+  --sand-ink: #4a4238;
+
+  /* Surfaces */
+  --surface: #faf7f2;
+  --surface-soft: #f3ece3;
+  --surface-card: #fffdfa;
+  --surface-dark: #2b2620;
+  --surface-dark-soft: #3a332b;
+  --surface-dark-card: #423a31;
+
+  /* Text */
+  --text-ink: #4a4238;
+  --text-soft: #7a6f63;
+  --text-faint: #a89c8e;
+  --text-dark-ink: #f3ece3;
+  --text-dark-soft: #cabfb1;
+  --text-dark-faint: #9c8a7d;
+
+  /* Borders */
+  --line: #e7ded3;
+  --line-strong: #d8cab9;
+  --line-dark: #4a4238;
+  --line-dark-strong: #5a5044;
+
+  /* Radius — soft, generous */
+  --radius-sm: 0.625rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-2xl: 2.5rem;
+  --radius-full: 9999px;
+
+  /* Soft shadows */
+  --shadow-xs: 0 1px 2px rgba(74, 66, 56, 0.04);
+  --shadow-sm: 0 2px 8px rgba(74, 66, 56, 0.06);
+  --shadow-md: 0 8px 24px rgba(74, 66, 56, 0.08);
+  --shadow-lg: 0 18px 40px rgba(74, 66, 56, 0.1);
+  --shadow-xl: 0 28px 60px rgba(74, 66, 56, 0.14);
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Hind Siliguri", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Noto Sans Bengali", sans-serif;
+  background-color: var(--surface);
+  color: var(--text-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  line-height: 1.65;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.dark body {
+  background-color: var(--surface-dark);
+  color: var(--text-dark-ink);
+}
+
+/* ---------- Reusable soft surface classes ---------- */
+.sand-bg {
+  background-color: var(--surface);
+}
+.sand-bg-soft {
+  background-color: var(--surface-soft);
+}
+.sand-card {
+  background-color: var(--surface-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.sand-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--line-strong);
+}
+.dark .sand-card {
+  background-color: var(--surface-dark-card);
+  border-color: var(--line-dark);
+}
+.dark .sand-card:hover {
+  border-color: var(--line-dark-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Soft pill button (primary) */
+.sand-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-family: "Hind Siliguri", sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--sand-almond-silk),
+    var(--sand-accent)
+  );
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+.sand-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  filter: brightness(1.04);
+}
+.sand-btn:active {
+  transform: translateY(0);
+}
+
+/* Soft outline button */
+.sand-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-family: "Hind Siliguri", sans-serif;
+  background: var(--surface-card);
+  color: var(--text-ink);
+  border: 1.5px solid var(--line-strong);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.sand-btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--sand-accent);
+  box-shadow: var(--shadow-sm);
+}
+.dark .sand-btn-ghost {
+  background: var(--surface-dark-card);
+  color: var(--text-dark-ink);
+  border-color: var(--line-dark-strong);
+}
+
+/* Soft form field */
+.sand-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--line-strong);
+  background: var(--surface-card);
+  color: var(--text-ink);
+  font-family: "Hind Siliguri", sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.sand-input:focus {
+  outline: none;
+  border-color: var(--sand-accent);
+  box-shadow: 0 0 0 4px rgba(176, 137, 104, 0.15);
+}
+.dark .sand-input {
+  background: var(--surface-dark-card);
+  border-color: var(--line-dark-strong);
+  color: var(--text-dark-ink);
+}
+
+/* Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #eee5da 25%, #e3d5ca 50%, #eee5da 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    #3a332b 25%,
+    #4a4238 50%,
+    #3a332b 75%
+  );
+  background-size: 200% 100%;
+}
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Accessibility focus */
+*:focus-visible {
+  outline: 2px solid var(--sand-accent);
+  outline-offset: 2px;
+}
+
+/* Consistent container */
+.container-sand {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 640px) {
+  .container-sand {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .container-sand {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Soft section heading helper */
+.sand-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  background: var(--sand-linen);
+  color: var(--sand-accent-strong);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+.dark .sand-eyebrow {
+  background: var(--surface-dark-soft);
+  color: var(--sand-almond-silk);
+}
+
+/* Line clamp */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
