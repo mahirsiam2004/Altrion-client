@@ -135,6 +135,22 @@
 
   --line: #3a3a3a;
   --line-strong: #4a4a4a;
+  --line-dark: #3a3a3a;
+  --line-dark-strong: #4a4a4a;
+
+  /* Legacy aliases used across the app (mapped to current palette) */
+  --surface-dark: #1a1a1a;
+  --surface-dark-soft: #222222;
+  --surface-dark-card: #2a2a2a;
+  --text-dark-ink: #FAFAFA;
+  --text-dark-soft: #B0B0B0;
+  --text-dark-faint: #707070;
+
+  --sand-accent: #8FA28A;
+  --sand-accent-strong: #C8A96B;
+  --sand-almond-silk: #C8A96B;
+  --sand-linen: #C7D3C0;
+  --sand-deep: #7a8d75;
 }
 
 * {
