@@ -41,15 +41,17 @@ export const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-[var(--surface)]/90 dark:bg-[var(--surface-dark)]/90 backdrop-blur-md border-b border-[var(--line)] dark:border-[var(--line-dark)] transition-colors duration-300">
       <div className="container-sand flex justify-between items-center h-16">
-        {/* Logo */}
+        {/* Logo - using actual logo.png from public */}
         <Link
           to="/"
           className="flex items-center space-x-2 font-bold text-[var(--sage)] dark:text-[var(--amber)] tracking-tight"
           onClick={closeMenu}
         >
-          <div className="w-8 h-8 rounded-xl bg-[var(--sage)] flex items-center justify-center">
-            <BookOpen className="w-5 h-5 text-white" />
-          </div>
+          <img
+            src="/logo.png"
+            alt="Altrion Logo"
+            className="w-9 h-9 md:w-10 md:h-10 object-contain"
+          />
           <span className="text-xl hidden sm:block">Altrion</span>
         </Link>
 

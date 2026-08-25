@@ -16,7 +16,7 @@ const Banner = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[var(--cream)]">
+    <section className="relative overflow-hidden bg-[var(--cream)] min-h-[70vh] flex items-center">
       {/* soft background washes */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 -left-32 w-[520px] h-[520px] rounded-full bg-[var(--sage-light)] opacity-30 blur-3xl" />
@@ -24,20 +24,20 @@ const Banner = () => {
         <div className="absolute -bottom-40 -right-40 w-[400px] h-[400px] rounded-full bg-[var(--amber)] opacity-15 blur-3xl" />
       </div>
 
-      <div className="relative container-sand py-24 lg:py-32">
-        {/* CENTERED Bangla copy */}
+      <div className="relative container-sand py-20 lg:py-28 w-full">
+        {/* CENTERED Bangla copy with Altrion */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 28 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-center max-w-4xl mx-auto"
+          className="text-center max-w-5xl mx-auto"
         >
           <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-[var(--sage-light)] text-[var(--sage)] text-sm font-semibold mb-7">
             <Sparkles className="w-4 h-4" />
             <span>নতুন সিজনের কোর্স এসেছে</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-[4.25rem] font-bold text-[var(--text-ink)] leading-[1.08] tracking-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-[4.5rem] font-bold text-[var(--text-ink)] leading-[1.05] tracking-tight mb-6">
             আপনার শেখার
             <span className="block text-[var(--sage)]">যাত্রা শুরু করুন</span>
           </h1>
@@ -48,13 +48,13 @@ const Banner = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <Link to="/courses">
-              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="sand-btn flex items-center space-x-2 text-base">
+              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="sand-btn flex items-center space-x-2 text-base px-8 py-3">
                 <span>কোর্স দেখুন</span>
                 <ArrowRight className="w-5 h-5" />
               </motion.button>
             </Link>
             <Link to="/about">
-              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="sand-btn-ghost flex items-center space-x-2 text-base">
+              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="sand-btn-ghost flex items-center space-x-2 text-base px-8 py-3">
                 <PlayCircle className="w-5 h-5" />
                 <span>আমাদের জানুন</span>
               </motion.button>
@@ -85,8 +85,6 @@ const Banner = () => {
             <span className="text-sm text-[var(--text-faint)]">১০,০০০+ শিক্ষার্থীর বিশ্বস্ত পছন্দ</span>
           </div>
         </motion.div>
-
-        {/* Right side image removed — centered layout per user request */}
       </div>
     </section>
   );
