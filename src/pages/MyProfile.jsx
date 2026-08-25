@@ -36,7 +36,7 @@ const MyProfile = () => {
 
   const handleLogout = async () => {
     try { await logout(); toast.success("লগ আউট সফল!"); navigate("/"); }
-    catch (err) { toast.error("লগ আউট সমস্যা"); }
+    catch { toast.error("লগ আউট সমস্যা"); }
   };
 
   return (

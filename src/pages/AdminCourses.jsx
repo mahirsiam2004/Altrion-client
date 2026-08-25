@@ -37,7 +37,7 @@ const AdminCourses = () => {
       await coursesAPI.deleteCourse(id);
       setCourses(courses.filter((c) => c._id !== id));
       Swal.fire({ title: "মোছা হয়েছে!", text: `"${title}" মোছা হয়েছে।`, icon: "success", timer: 2000, showConfirmButton: false });
-    } catch (err) {
+    } catch {
       Swal.fire({ title: "ত্রুটি!", text: "মোছা যায়নি।", icon: "error", confirmButtonColor: "#b08968" });
     }
   };

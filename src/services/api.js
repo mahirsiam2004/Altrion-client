@@ -77,7 +77,7 @@ export const coursesAPI = {
       // Try featured endpoint first
       const response = await api.get('/courses/featured');
       return response.data;
-    } catch (error) {
+    } catch {
       // Fallback: get all courses and filter
       const allCourses = await api.get('/courses');
       const coursesArray = Array.isArray(allCourses.data) ? allCourses.data : [];
