@@ -1,14 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import {
-  BookOpen,
-  DollarSign,
-  Clock,
-  Image,
-  Tag,
-  FileText,
-} from "lucide-react";
+import { BookOpen, DollarSign, Clock, Image, Tag, FileText, CheckCircle } from "lucide-react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 import { coursesAPI } from "../services/api";
@@ -19,260 +12,115 @@ const AddCourse = () => {
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-    title: "",
-    imageURL: "",
-    price: "",
-    duration: "",
-    category: "",
-    description: "",
-    isFeatured: false,
+    title: "", imageURL: "", price: "", duration: "", category: "", description: "", isFeatured: false,
   });
 
-  const categories = [
-    "Web Development",
-    "Mobile Development",
-    "Data Science",
-    "Machine Learning",
-    "UI/UX Design",
-    "Digital Marketing",
-    "Business",
-    "Photography",
-  ];
+  const categories = ["ওয়েব ডেভেলপমেন্ট", "মোবাইল ডেভেলপমেন্ট", "ডেটা সায়েন্স", "মেশিন লার্নিং", "UI/UX ডিজাইন", "ডিজিটাল মার্কেটিং", "বিজনেস", "ফটোগ্রাফি"];
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!user) {
-      toast.error("You must be logged in to add a course");
-      navigate("/signin");
-      return;
-    }
-
+    if (!user) { toast.error("কোর্স যোগ করতে লগ ইন প্রয়োজন"); navigate("/signin"); return; }
     setLoading(true);
-
     try {
-      const courseData = {
-        ...formData,
-        price: parseFloat(formData.price),
-        instructor: {
-          name: user.displayName,
-          email: user.email,
-          photo: user.photoURL,
-        },
-      };
-
+      const courseData = { ...formData, price: parseFloat(formData.price), instructor: { name: user.displayName, email: user.email, photo: user.photoURL } };
       await coursesAPI.createCourse(courseData);
-
-      toast.success("Course added successfully! 🎉");
-      navigate("/my-courses");
+      toast.success("কোর্স সফলভাবে যোগ করা হয়েছে!");
+      navigate("/dashboard/my-courses");
     } catch (error) {
       console.error("Error adding course:", error);
-      toast.error(error.response?.data?.message || "Failed to add course. Please try again.");
+      toast.error(error.response?.data?.message || "কোর্স যোগ করা যায়নি। আবার চেষ্টা করুন।");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl shadow-lg p-8"
-        >
-          {/* Header */}
+    <div className="min-h-screen bg-[var(--surface)] dark:bg-[var(--surface-dark)] py-12">
+      <div className="container-sand max-w-4xl">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="sand-card p-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Add New Course
-            </h1>
-            <p className="text-gray-600">Share your knowledge with the world</p>
+            <h1 className="text-3xl font-bold text-[var(--text-ink)] dark:text-[var(--text-dark-ink)] mb-2">নতুন কোর্স যোগ</h1>
+            <p className="text-[var(--text-soft)] dark:text-[var(--text-dark-soft)]">আপনার জ্ঞান বিশ্বের সাথে শেয়ার করুন</p>
           </div>
 
-          {/* Instructor Info (Auto-filled) */}
-          <div className="mb-8 p-4 bg-indigo-50 rounded-lg border border-indigo-200">
-            <p className="text-sm text-indigo-700 font-semibold mb-2">
-              Instructor Information (Auto-filled)
-            </p>
+          <div className="mb-8 p-4 bg-[var(--sand-linen)] dark:bg-[var(--surface-dark-soft)] rounded-xl border border-[var(--sand-almond-silk)]">
+            <p className="text-sm text-[var(--sand-accent-strong)] dark:text-[var(--sand-almond-silk)] font-semibold mb-2">প্রশিক্ষকের তথ্য (অটো-ফিল)</p>
             <div className="flex items-center space-x-3">
-              <img
-                src={user?.photoURL || "https://via.placeholder.com/48"}
-                alt={user?.displayName}
-                className="w-12 h-12 rounded-full object-cover"
-                onError={(e) => {
-                  e.target.src = "https://via.placeholder.com/48";
-                }}
-              />
+              <img src={user?.photoURL || "https://via.placeholder.com/48"} alt={user?.displayName} className="w-12 h-12 rounded-full object-cover" onError={(e)=>{e.target.src="https://via.placeholder.com/48";}} />
               <div>
-                <p className="font-semibold text-gray-900">
-                  {user?.displayName}
-                </p>
-                <p className="text-sm text-gray-600">{user?.email}</p>
+                <p className="font-semibold text-[var(--text-ink)] dark:text-[var(--text-dark-ink)]">{user?.displayName}</p>
+                <p className="text-sm text-[var(--text-soft)] dark:text-[var(--text-dark-soft)]">{user?.email}</p>
               </div>
             </div>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Title */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Course Title *
-              </label>
+              <label className="block text-sm font-medium text-[var(--text-soft)] dark:text-[var(--text-dark-soft)] mb-2">কোর্সের শিরোনাম *</label>
               <div className="relative">
-                <BookOpen className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                  placeholder="e.g., Complete Web Development Bootcamp"
-                  required
-                />
+                <BookOpen className="absolute left-3 top-3 w-5 h-5 text-[var(--text-faint)]" />
+                <input type="text" name="title" value={formData.title} onChange={handleChange} className="sand-input pl-10" placeholder="যেমন: সম্পূর্ণ ওয়েব ডেভেলপমেন্ট বুটক্যাম্প" required />
               </div>
             </div>
 
-            {/* Image URL */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Image URL *
-              </label>
+              <label className="block text-sm font-medium text-[var(--text-soft)] dark:text-[var(--text-dark-soft)] mb-2">ছবির লিংক *</label>
               <div className="relative">
-                <Image className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                <input
-                  type="url"
-                  name="imageURL"
-                  value={formData.imageURL}
-                  onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                  placeholder="https://example.com/image.jpg"
-                  required
-                />
+                <Image className="absolute left-3 top-3 w-5 h-5 text-[var(--text-faint)]" />
+                <input type="url" name="imageURL" value={formData.imageURL} onChange={handleChange} className="sand-input pl-10" placeholder="https://example.com/image.jpg" required />
               </div>
-              <p className="text-xs text-gray-500 mt-1">
-                Tip: Upload to imgbb.com and paste the direct link
-              </p>
+              <p className="text-xs text-[var(--text-faint)] dark:text-[var(--text-dark-faint)] mt-1">টিপস: imgbb.com-এ আপলোড করে সরাসরি লিংক পেস্ট করুন</p>
             </div>
 
-            {/* Price & Duration */}
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Price (USD) *
-                </label>
+                <label className="block text-sm font-medium text-[var(--text-soft)] dark:text-[var(--text-dark-soft)] mb-2">মূল্য (USD) *</label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                  <input
-                    type="number"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="99.99"
-                    step="0.01"
-                    min="0"
-                    required
-                  />
+                  <DollarSign className="absolute left-3 top-3 w-5 h-5 text-[var(--text-faint)]" />
+                  <input type="number" name="price" value={formData.price} onChange={handleChange} className="sand-input pl-10" placeholder="৯৯.৯৯" step="0.01" min="0" required />
                 </div>
               </div>
-
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Duration *
-                </label>
+                <label className="block text-sm font-medium text-[var(--text-soft)] dark:text-[var(--text-dark-soft)] mb-2">সময়কাল *</label>
                 <div className="relative">
-                  <Clock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                  <input
-                    type="text"
-                    name="duration"
-                    value={formData.duration}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="e.g., 8 weeks, 20 hours"
-                    required
-                  />
+                  <Clock className="absolute left-3 top-3 w-5 h-5 text-[var(--text-faint)]" />
+                  <input type="text" name="duration" value={formData.duration} onChange={handleChange} className="sand-input pl-10" placeholder="যেমন: ৮ সপ্তাহ, ২০ ঘণ্টা" required />
                 </div>
               </div>
             </div>
 
-            {/* Category */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Category *
-              </label>
+              <label className="block text-sm font-medium text-[var(--text-soft)] dark:text-[var(--text-dark-soft)] mb-2">বিষয় *</label>
               <div className="relative">
-                <Tag className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                <select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                  required
-                >
-                  <option value="">Select a category</option>
-                  {categories.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
+                <Tag className="absolute left-3 top-3 w-5 h-5 text-[var(--text-faint)]" />
+                <select name="category" value={formData.category} onChange={handleChange} className="sand-input pl-10" required>
+                  <option value="">বিষয় বাছাই করুন</option>
+                  {categories.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
                 </select>
               </div>
             </div>
 
-            {/* Description */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Description *
-              </label>
+              <label className="block text-sm font-medium text-[var(--text-soft)] dark:text-[var(--text-dark-soft)] mb-2">বিবরণ *</label>
               <div className="relative">
-                <FileText className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  rows="5"
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                  placeholder="Describe what students will learn in this course..."
-                  required
-                ></textarea>
+                <FileText className="absolute left-3 top-3 w-5 h-5 text-[var(--text-faint)]" />
+                <textarea name="description" value={formData.description} onChange={handleChange} rows="5" className="sand-input pl-10 resize-none" placeholder="শিক্ষার্থীরা এই কোর্স থেকে কী শিখবে বর্ণনা করুন..." required></textarea>
               </div>
             </div>
 
-            {/* Featured Checkbox */}
             <div className="flex items-center">
-              <input
-                type="checkbox"
-                name="isFeatured"
-                checked={formData.isFeatured}
-                onChange={handleChange}
-                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-              />
-              <label className="ml-2 text-sm text-gray-700">
-                Mark as Featured Course
-              </label>
+              <input type="checkbox" name="isFeatured" checked={formData.isFeatured} onChange={handleChange} className="w-4 h-4 text-[var(--sand-accent)] rounded focus:ring-[var(--sand-accent)]" />
+              <label className="ml-2 text-sm text-[var(--text-soft)] dark:text-[var(--text-dark-soft)]">বিশেষ কোর্স হিসেবে চিহ্নিত করুন</label>
             </div>
 
-            {/* Submit Button */}
-            <div className="pt-4">
-              <motion.button
-                type="submit"
-                disabled={loading}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                {loading ? "Adding Course..." : "Add Course"}
-              </motion.button>
-            </div>
+            <motion.button type="submit" disabled={loading} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sand-btn disabled:opacity-50">
+              {loading ? "যোগ করা হচ্ছে..." : <><CheckCircle className="w-5 h-5" /><span>কোর্স যোগ করুন</span></>}
+            </motion.button>
           </form>
         </motion.div>
       </div>
