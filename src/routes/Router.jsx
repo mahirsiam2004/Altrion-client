@@ -23,7 +23,7 @@ import AdminUsers from "../pages/AdminUsers";
 import DashboardLayout from "../layouts/DashboardLayout";
 
 import { coursesAPI } from "../services/api";
-import MainLayout from "../layourts/MainLayout";
+import MainLayout from "../layouts/MainLayout";
 
 export const Router = createBrowserRouter([
   {
